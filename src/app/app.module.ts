@@ -13,6 +13,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ResetpwComponent } from './components/resetpw/resetpw.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './auth.guard';
+import { TaskOverviewComponent } from './components/task-overview/task-overview.component';
+import { TaskDetailComponent } from './components/task-detail/task-detail.component';
+import { CategorysComponent } from './components/categorys/categorys.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { AuthGuard } from './auth.guard';
     HomeComponent,
     LoginComponent,
     SignupComponent,
-    ResetpwComponent
+    ResetpwComponent,
+    TaskOverviewComponent,
+    TaskDetailComponent,
+    CategorysComponent
   ],
   imports: [
     BrowserModule,
