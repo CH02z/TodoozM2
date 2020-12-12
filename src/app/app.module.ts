@@ -26,7 +26,7 @@ import { CategorysComponent } from './components/categorys/categorys.component';
     ResetpwComponent,
     TaskOverviewComponent,
     TaskDetailComponent,
-    CategorysComponent
+    CategorysComponent,
   ],
   imports: [
     BrowserModule,

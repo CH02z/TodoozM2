@@ -1,1 +1,31 @@
-<p>categorys works!</p>
+<div class="container">
+  <form #categoryForm="ngForm" (submit)="onSubmit(categoryForm)">
+
+    <input type= "hidden" class="form-control" name="id" [(ngModel)]="selecteCategory.id">
+    <div class="form-group">
+      <label>Kategorie Hinzufügen</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="selecteCategory.name" placeholder="Name" required>
+    </div>
+
+      <button id="taskSubmit" type="submit" class="btn btn-info btn-sm" [disabled]="!categoryForm.valid">speichern</button>
+      <button id="taskReset" type="button" class="btn btn-secondary btn-sm" (click)="resetForm(categoryForm)" style="margin-left: 10px;">zurücksetzen</button>
+
+    </form>
+
+  <br>
+  <br>
+
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let category of categorys;">
+      {{ category.name }}
+      <img src="../../../assets/img/trash.png" (click)="onDelete(category.id)">
+   </li>
+  </ul>
+
+
+</div>
+
+
+
+
+

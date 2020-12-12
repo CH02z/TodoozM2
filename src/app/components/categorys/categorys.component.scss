@@ -1,0 +1,16 @@
+
+.list-group-item {
+  max-width: 350px;
+  &:hover {
+      background-color:rgb(245, 245, 245);
+  }
+}
+
+img {
+  height: 18px;
+  margin-right: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+  float: right;
+
+}
