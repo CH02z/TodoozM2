@@ -16,6 +16,7 @@ import { AuthGuard } from './auth.guard';
 import { TaskOverviewComponent } from './components/task-overview/task-overview.component';
 import { TaskDetailComponent } from './components/task-detail/task-detail.component';
 import { CategorysComponent } from './components/categorys/categorys.component';
+import { CategorysFormComponent } from './components/categorys-form/categorys-form.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CategorysComponent } from './components/categorys/categorys.component';
     TaskOverviewComponent,
     TaskDetailComponent,
     CategorysComponent,
+    CategorysFormComponent,
   ],
   imports: [
     BrowserModule,

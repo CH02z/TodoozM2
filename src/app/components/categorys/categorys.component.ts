@@ -12,7 +12,6 @@ import { NgForm } from '@angular/forms';
 })
 export class CategorysComponent implements OnInit {
 
-  selecteCategory: Category = new Category();
   categorys?: Category[];
 
   constructor(public authService: AuthService,
@@ -30,21 +29,7 @@ export class CategorysComponent implements OnInit {
     });
   }
 
-  /* getCategorys(): Category[] {
-    this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
-      this.categorys = category.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as Category;
-      });
-      console.log(this.categorys);
-    });
-    return(this.categorys);
-  } */
-
   getCategorys(): void {
-    console.log('get category called');
     let tempCategorys: Category[] = [];
     this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
       category.forEach(element => {
@@ -57,25 +42,12 @@ export class CategorysComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm): void {
-    this.categoryService.CreateCategory(this.selecteCategory);
-    this.resetForm(form);
-  }
+  
 
-  onDelete(categoryID: string): void {
-    this.categoryService.DeleteCategory(categoryID);
-  }
-
-  resetForm(form?: NgForm): void {
-    if (form != null) {
-      form.reset();
+  onDelete(categoryID: string | undefined): void {
+    if (categoryID !== undefined) {
+      this.categoryService.DeleteCategory(categoryID);
     }
+    window.alert('Kategorie erfolreich gelöscht!');
   }
-
-
-
-
-
-
-
 }
