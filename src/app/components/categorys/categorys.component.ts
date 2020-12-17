@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Category } from 'src/app/models/Category';
 import { CategoryService } from 'src/app/Services/category.service';
-import { NgForm } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-categorys',
@@ -13,10 +13,12 @@ import { NgForm } from '@angular/forms';
 export class CategorysComponent implements OnInit {
 
   categorys?: Category[];
+  modalRef?: BsModalRef;
 
   constructor(public authService: AuthService,
               public af: AngularFireAuth,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private modalService: BsModalService) {
               }
 
   ngOnInit(): void {
@@ -42,12 +44,21 @@ export class CategorysComponent implements OnInit {
     });
   }
 
-  
-
   onDelete(categoryID: string | undefined): void {
     if (categoryID !== undefined) {
       this.categoryService.DeleteCategory(categoryID);
     }
     window.alert('Kategorie erfolreich gelöscht!');
   }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  closeModal(status: string): void {
+    if (status == 'hide') {
+      this.modalRef?.hide();
+    }
+  }
+
 }

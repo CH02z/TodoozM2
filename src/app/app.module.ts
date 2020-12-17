@@ -17,6 +17,7 @@ import { TaskOverviewComponent } from './components/task-overview/task-overview.
 import { TaskDetailComponent } from './components/task-detail/task-detail.component';
 import { CategorysComponent } from './components/categorys/categorys.component';
 import { CategorysFormComponent } from './components/categorys-form/categorys-form.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CategorysFormComponent } from './components/categorys-form/categorys-fo
     AngularFireAuthModule,
     AngularFirestoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

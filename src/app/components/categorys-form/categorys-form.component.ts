@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { Category } from 'src/app/models/Category';
@@ -12,6 +12,8 @@ import { CategoryService } from 'src/app/Services/category.service';
 })
 export class CategorysFormComponent implements OnInit {
 
+  @Output() closeModal = new EventEmitter<string>();
+
   selecteCategory: Category = new Category();
 
   constructor(public authService: AuthService,
@@ -22,9 +24,13 @@ export class CategorysFormComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    this.categoryService.CreateCategory(this.selecteCategory);
-    window.alert('Kategorie ' + this.selecteCategory.name + ' erfolreich hinzugefügt!')
-    this.resetForm(form);
+    if (form.valid) {
+      this.categoryService.CreateCategory(this.selecteCategory);
+      this.closeModal.emit('hide')
+      window.alert('Kategorie ' + this.selecteCategory.name + ' erfolreich hinzugefügt!')
+      this.resetForm(form);
+    }
+   
   }
 
   resetForm(form?: NgForm): void {
