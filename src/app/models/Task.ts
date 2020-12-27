@@ -1,6 +1,6 @@
 export class Task {
   id?: string;
-  title?: string;
+  name?: string;
   endDate?: Date;
   category?: string;
   isDone?: boolean;

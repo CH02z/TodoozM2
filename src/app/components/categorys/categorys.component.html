@@ -4,10 +4,10 @@
 <div class="container" *ngIf="authService.user | async">
 
 
-<ng-template #template>
+<ng-template #categoryModal>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <h4 class="modal-title pull-left">Kategorie Hinzufügen</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -31,7 +31,7 @@
 
 
   <button type="button" class="btn btn-secondary btn-sm" routerLink="/home" style="margin-right: 10px;">zurück</button>
-  <button type="button" class="btn btn-info btn-sm" (click)="openModal(template)">hinzufügen</button>
+  <button type="button" class="btn btn-info btn-sm" (click)="openModal(categoryModal)">hinzufügen</button>
 
 
 </div>

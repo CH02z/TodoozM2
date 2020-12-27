@@ -26,8 +26,8 @@ export class CategorysFormComponent implements OnInit {
   onSubmit(form: NgForm): void {
     if (form.valid) {
       this.categoryService.CreateCategory(this.selecteCategory);
-      this.closeModal.emit('hide')
-      window.alert('Kategorie ' + this.selecteCategory.name + ' erfolreich hinzugefügt!')
+      this.closeModal.emit('hide');
+      window.alert('Kategorie: ' + this.selecteCategory.name + ' erfolreich hinzugefügt!');
       this.resetForm(form);
     }
    

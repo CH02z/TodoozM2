@@ -13,11 +13,11 @@ import { SignupComponent } from './components/signup/signup.component';
 import { ResetpwComponent } from './components/resetpw/resetpw.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './auth.guard';
-import { TaskOverviewComponent } from './components/task-overview/task-overview.component';
 import { TaskDetailComponent } from './components/task-detail/task-detail.component';
 import { CategorysComponent } from './components/categorys/categorys.component';
 import { CategorysFormComponent } from './components/categorys-form/categorys-form.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TaskFormComponent } from './components/task-form/task-form.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +26,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     LoginComponent,
     SignupComponent,
     ResetpwComponent,
-    TaskOverviewComponent,
     TaskDetailComponent,
     CategorysComponent,
     CategorysFormComponent,
+    TaskFormComponent,
   ],
   imports: [
     BrowserModule,
