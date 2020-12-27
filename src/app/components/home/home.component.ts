@@ -69,9 +69,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  onCheck(taskID: string | undefined) {
+    setTimeout(() => {
+      if (taskID) {
+        this.taskService.CheckTask(taskID);
+      }
+    }, 800);
+  }
+
   containsHighPriority(): boolean {
     let containsHighPriority = false;
-    if (this.tasks?.length !== 0 && this.tasks !== undefined) {
+    if (this.tasks?.length !== 0 && this.tasks) {
       this.tasks.forEach(element => {
         if (element.highPriority && !element.isDone) {
           containsHighPriority = true;
@@ -79,6 +87,27 @@ export class HomeComponent implements OnInit {
       });
     }
     return containsHighPriority;
+  }
+
+  categoryIsUsed(category: string | undefined): boolean {
+    let usedCategorys: string[] = [];
+    if (this.tasks?.length !== 0 && this.tasks && this.categorys) {
+      this.tasks.forEach(task => {
+        if (!task.isDone && !task.highPriority) {
+          if (task.category) {
+            if (!usedCategorys.includes(task.category)) {
+              usedCategorys.push(task.category as string)
+            }
+          }
+        }
+      });
+    }
+    let returnbool = false;
+    if (category) {
+      returnbool = usedCategorys.includes(category) ? true : false;
+    }
+    return returnbool;
+    
   }
 
   openModal(template: TemplateRef<any>) {

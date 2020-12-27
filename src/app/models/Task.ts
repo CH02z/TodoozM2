@@ -5,7 +5,7 @@ export class Task {
   category?: string;
   isDone?: boolean;
   description?: string;
-  dateDefined?: Date;
-  dateFinished?: Date;
+  dateDefined?: number;
+  dateFinished?: number;
   highPriority?: boolean;
 }

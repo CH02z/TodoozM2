@@ -27,18 +27,21 @@ export class TaskService {
   }
 
   CreateTask(task: Task): void {
-    console.log(task);
     if (task.name !== undefined) {
       const newTask: Task = {name: task.name,
                             endDate: task.endDate,
                             category: task.category,
                             isDone: false,
                             description: task.description,
-                            dateDefined: new Date(),
+                            dateDefined: Date.now(),
                             highPriority: task.highPriority
                           };
       this.db.collection('users').doc(this.uid).collection('tasks').add(newTask);
     }
+  }
+
+  CheckTask(taskID: string): void {
+    this.db.collection('users').doc(this.uid + '/' + 'tasks/' + taskID).update({isDone: true, dateFinished: Date.now()})
   }
 
   DeleteTask(taskID: string): void {
