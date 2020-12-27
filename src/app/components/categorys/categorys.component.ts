@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Category } from 'src/app/models/Category';
 import { CategoryService } from 'src/app/Services/category.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { TaskService } from 'src/app/Services/task.service';
+import { Task } from 'src/app/models/Task';
 
 @Component({
   selector: 'app-categorys',
@@ -13,22 +15,26 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 export class CategorysComponent implements OnInit {
 
   categorys?: Category[];
+  tasks?: Task[];
   modalRef?: BsModalRef;
 
   constructor(public authService: AuthService,
               public af: AngularFireAuth,
               private categoryService: CategoryService,
+              private taskService: TaskService,
               private modalService: BsModalService) {
+                this.af.authState.subscribe(user => {
+                  if (user) {
+                    this.categorys = [];
+                    this.tasks = [];
+                    this.getCategorys();
+                    this.getTasks();
+            
+                  }
+                });
               }
 
   ngOnInit(): void {
-    this.af.authState.subscribe(user => {
-      if (user) {
-        this.categorys = [];
-        this.getCategorys();
-
-      }
-    });
   }
 
   getCategorys(): void {
@@ -42,6 +48,39 @@ export class CategorysComponent implements OnInit {
       this.categorys = tempCategorys;
       tempCategorys = []; //reset temp categorys
     });
+  }
+
+  getTasks(): void {
+    let tempTasks: Task[] = [];
+    this.taskService.GetTasks().snapshotChanges().subscribe(category => {
+      category.forEach(element => {
+        const y = element.payload.doc.data();
+        y['id'] = element.payload.doc.id;
+        tempTasks.push(y as Task);
+      });
+      this.tasks = tempTasks;
+      tempTasks = []; //reset temp tasks
+    });
+  }
+
+  categoryIsUsed(category: string | undefined): boolean {
+    let usedCategorys: string[] = [];
+    if (this.tasks?.length !== 0 && this.tasks && this.categorys) {
+      this.tasks.forEach(task => {
+        if (!task.isDone) {
+          if (task.category) {
+            if (!usedCategorys.includes(task.category)) {
+              usedCategorys.push(task.category as string)
+            }
+          }
+        }
+      });
+    }
+    let returnbool = false;
+    if (category) {
+      returnbool = usedCategorys.includes(category)
+    }
+    return returnbool;
   }
 
   onDelete(categoryID: string | undefined): void {

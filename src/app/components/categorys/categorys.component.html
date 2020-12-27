@@ -23,7 +23,7 @@
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let category of categorys;">
       {{ category.name }}
-      <img src="../../../assets/img/trash.png" alt="delete" (click)="onDelete(category.id)">
+      <img *ngIf="!categoryIsUsed(category.name)" src="../../../assets/img/trash.png" alt="delete" (click)="onDelete(category.id)">
       
    </li>
   </ul>
