@@ -1,1 +1,3 @@
-<p>task-detail works!</p>
+<p><b>Erstellt:</b> {{task?.dateDefined | date:'medium'}}</p>
+<p *ngIf="task?.isDone"><b>Beendet:</b>  {{task?.dateFinished}}</p>
+<p><b>Beschreibung:</b> {{task?.description}}</p>

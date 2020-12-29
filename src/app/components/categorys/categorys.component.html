@@ -1,1 +1,43 @@
-<p>categorys works!</p>
+<br>
+<br>
+
+<div class="container" *ngIf="authService.user | async">
+
+
+<ng-template #categoryModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Kategorie Hinzufügen</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-categorys-form (closeModal)="closeModal($event)"></app-categorys-form>
+  </div>
+</ng-template>
+
+
+  <p *ngIf="categorys?.length === 0">Noch keine Kategorien hinzugefügt...</p>
+
+
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let category of categorys;">
+      {{ category.name }}
+      <img *ngIf="!categoryIsUsed(category.name)" src="../../../assets/img/trash.png" alt="delete" (click)="onDelete(category.id)">
+      
+   </li>
+  </ul>
+
+  <br>
+
+
+  <button type="button" class="btn btn-secondary btn-sm" routerLink="/home" style="margin-right: 10px;">zurück</button>
+  <button type="button" class="btn btn-info btn-sm" (click)="openModal(categoryModal)">hinzufügen</button>
+
+
+</div>
+
+
+
+
+

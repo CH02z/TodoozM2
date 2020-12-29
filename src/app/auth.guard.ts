@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
     }
 
     // navigate to login page
-    //console.log('auth guard prevented access to home')
+    console.log('auth guard prevented access to home')
     this.router.navigate(['/login']);
     // you can save redirect url so after authing we can move them back to the page they requested
     return false;
