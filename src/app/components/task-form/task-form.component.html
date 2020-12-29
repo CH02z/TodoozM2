@@ -1,4 +1,4 @@
-<form [formGroup]="taskForm">
+<form *ngIf="showForm" [formGroup]="taskForm">
 
   <div class="form-group">
     <input type= "hidden" class="form-control" formControlName="taskID">
@@ -33,6 +33,6 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description" placeholder="Beischreibung"></textarea>
   </div>
 
-  <button type="button" (click)="onSubmit()" [disabled]="!taskForm?.valid" class="btn btn-success btn-sm">speichern</button>
+  <button type="button" (click)="onSubmit()" [disabled]="!taskForm?.valid" class="btn btn-info btn-sm">speichern</button>
 
 </form>

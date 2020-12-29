@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/Category';
@@ -14,6 +14,13 @@ import { TaskService } from 'src/app/Services/task.service';
 export class TaskFormComponent implements OnInit {
 
   @Output() closeModal = new EventEmitter<string>();
+  @Output() hideForm = new EventEmitter<string>();
+  @Input() editTask?: Task;
+  @Input() category?: string;
+
+
+  showForm: boolean = false;
+
 
   categorys?: Category[];
   taskForm: FormGroup;
@@ -22,7 +29,8 @@ export class TaskFormComponent implements OnInit {
               private categoryService: CategoryService,
               private formBuilder: FormBuilder,
               private taskService: TaskService) {
-                this.taskForm = this.createUserForm();
+                this.taskForm = this.formBuilder.group({});
+                
               }
 
   ngOnInit(): void {
@@ -30,6 +38,8 @@ export class TaskFormComponent implements OnInit {
       if (user) {
         this.categorys = [];
         this.getCategorys();
+        this.taskForm = this.createUserForm();
+        this.showForm = true;
         
       }
     });
@@ -49,7 +59,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   createUserForm() {
-    if (this.taskService.selectedTask === undefined) {
+    if (this.editTask === undefined) {
       this.taskForm = this.formBuilder.group({
         taskID: [''],
         name: ['', Validators.required],
@@ -58,15 +68,20 @@ export class TaskFormComponent implements OnInit {
         highPriority: [''],
         description: ['']
       });
+      if (this.category !== '') {
+        this.taskForm.get('category')?.setValue(this.category);
+        this.category = '';
+      }
+      
 
     } else {
       this.taskForm = this.formBuilder.group({
-        taskID: [this.taskService.selectedTask.id],
-        name: [this.taskService.selectedTask.name, Validators.required],
-        endDate: [this.taskService.selectedTask.endDate, [Validators.required]],
-        category: [this.taskService.selectedTask.category, [Validators.required]],
-        highPriority: [this.taskService.selectedTask.highPriority],
-        description: [this.taskService.selectedTask.description]
+        taskID: [this.editTask.id],
+        name: [this.editTask.name, Validators.required],
+        endDate: [this.editTask.endDate, [Validators.required]],
+        category: [this.editTask.category, [Validators.required]],
+        highPriority: [this.editTask.highPriority],
+        description: [this.editTask.description]
       });
     }
     return this.taskForm;
@@ -75,10 +90,18 @@ export class TaskFormComponent implements OnInit {
     onSubmit() {
       if (this.taskForm) {
         if (this.taskForm.valid) {
-          this.taskService.CreateTask(this.taskForm.value)
-          this.closeModal.emit('hide');
-          //window.alert('Aufgabe: ' + this.taskForm.value.name + ' erfolreich hinzugefügt!');
-          this.resetForm();
+          if (this.taskForm.value.taskID === "") {
+            this.taskService.CreateTask(this.taskForm.value)
+            this.closeModal.emit('hide');
+            //window.alert('Aufgabe: ' + this.taskForm.value.name + ' erfolreich hinzugefügt!');
+            this.resetForm();
+          } else {
+            this.taskService.UpdateTask(this.taskForm.value);
+            this.resetForm()
+            this.closeModal.emit('hide');
+            this.hideForm.emit('hide');
+          }
+          
         }
       }
     }

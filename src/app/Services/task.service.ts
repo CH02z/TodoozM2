@@ -10,7 +10,6 @@ import { AuthService } from './auth.service';
 export class TaskService {
 
   uid = '';
-  selectedTask: Task = new Task();
 
   constructor(public authService: AuthService,
               private af: AngularFireAuth,
@@ -42,6 +41,14 @@ export class TaskService {
 
   CheckTask(taskID: string): void {
     this.db.collection('users').doc(this.uid + '/' + 'tasks/' + taskID).update({isDone: true, dateFinished: Date.now()})
+  }
+
+  UpdateTask(task: any): void {
+    this.db.collection('users').doc(this.uid + '/' + 'tasks/' + task.taskID).update({name: task.name,
+                                                                                    endDate: task.endDate,
+                                                                                    category: task.category,
+                                                                                    highPriority: task.highPriority,
+                                                                                    description: task.description})
   }
 
   DeleteTask(taskID: string): void {

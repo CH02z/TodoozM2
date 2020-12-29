@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'resetpw', component: ResetpwComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'categorys', component: CategorysComponent},
+  {path: 'categorys', component: CategorysComponent, canActivate: [AuthGuard]},
 
 ];
 

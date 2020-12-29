@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CategoryService } from 'src/app/Services/category.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -19,12 +18,15 @@ export class HomeComponent implements OnInit {
   email: string | null = '';
   categorys?: Category[];
   tasks?: Task[];
+  detailTask: Task = new Task();
+  showEditForm: boolean = false;
   modalRef?: BsModalRef;
   searchTerm?: string;
+  formTask?: Task;
+  selectedCategory?: string;
 
 
   constructor(public authService: AuthService,
-              private router: Router,
               public af: AngularFireAuth,
               private categoryService: CategoryService,
               private taskService: TaskService,
@@ -77,6 +79,24 @@ export class HomeComponent implements OnInit {
     }, 800);
   }
 
+  onDelete(taskID: string | undefined): void {
+    if (taskID) {
+      this.taskService.DeleteTask(taskID);
+      window.alert('Aufgabe erfolreich gelöscht!');
+    }
+  }
+
+  openTaskDetail(task: Task): void {
+    this.detailTask = Object.assign({}, task)
+  }
+
+  hideForm(status: string): void {
+    if (status === 'hide') {
+      this.detailTask  = new Task();
+      this.showEditForm = false;
+    }
+  }
+
   containsHighPriority(): boolean {
     let containsHighPriority = false;
     if (this.tasks?.length !== 0 && this.tasks) {
@@ -110,13 +130,22 @@ export class HomeComponent implements OnInit {
     
   }
 
+  openEditorWithCategory(category: string | undefined, template: TemplateRef<any>): void {
+    if (category) {
+      this.selectedCategory = category;
+      this.openModal(template);
+    }
+    
+  }
+
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 
   closeModal(status: string): void {
-    if (status == 'hide') {
+    if (status === 'hide') {
       this.modalRef?.hide();
+      this.selectedCategory = '';
     }
   }
 
