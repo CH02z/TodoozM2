@@ -6,19 +6,40 @@
   
   <div class="form-group">
     <label>Aufgabe</label>
-    <input type="text" class="form-control" formControlName="name" placeholder="Titel">
+    <input type="text" class="form-control" [ngClass]="{'is-invalid': name?.invalid && (name?.dirty || name?.touched)}" formControlName="name" placeholder="Name">
+    <div *ngIf="name?.invalid && (name?.dirty || name?.touched)"
+      class="text-danger">
+  
+    <div *ngIf="name?.errors?.required">
+      Ein name wird benötigt.
+    </div>
+    </div>
   </div>
 
   <div class="form-group">
     <label>Zu erledigen bis</label>
-    <input type="date" class="form-control" formControlName="endDate" placeholder="Datum">
+    <input type="date" class="form-control" [ngClass]="{'is-invalid': endDate?.invalid && (endDate?.dirty || endDate?.touched)}" formControlName="endDate" placeholder="Datum">
+    <div *ngIf="endDate?.invalid && (endDate?.dirty || endDate?.touched)"
+      class="text-danger">
+  
+    <div *ngIf="endDate?.errors?.required">
+      Ein Enddatum muss gewählt werden.
+    </div>
+    </div>
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlSelect1">Kategorie</label>
-    <select class="form-control" id="exampleFormControlSelect1" formControlName="category">
+    <select class="form-control" [ngClass]="{'is-invalid': categoryv?.invalid && (categoryv?.dirty || categoryv?.touched)}" id="exampleFormControlSelect1" formControlName="category">
       <option *ngFor="let category of categorys" [value]="category.name">{{category.name}}</option>
     </select>
+    <div *ngIf="categoryv?.invalid && (categoryv?.dirty || categoryv?.touched)"
+    class="text-danger">
+
+    <div *ngIf="categoryv?.errors?.required">
+      Eine Kategorie muss gewählt werden.
+    </div>
+    </div>
   </div>
 
   <div class="custom-control custom-checkbox">
@@ -33,6 +54,6 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description" placeholder="Beischreibung"></textarea>
   </div>
 
-  <button type="button" (click)="onSubmit()" [disabled]="!taskForm?.valid" class="btn btn-info btn-sm">speichern</button>
+  <button type="button" (click)="onSubmit()" class="btn btn-info btn-sm">speichern</button>
 
 </form>

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/Category';
 import { Task } from 'src/app/models/Task';
 import { CategoryService } from 'src/app/Services/category.service';
@@ -44,6 +44,21 @@ export class TaskFormComponent implements OnInit {
       }
     });
   }
+
+  validateAllFormFields(formGroup: FormGroup) {
+  Object.keys(formGroup.controls).forEach(field => {  
+    const control = formGroup.get(field);             
+    if (control instanceof FormControl) {            
+      control.markAsTouched({ onlySelf: true });
+    } else if (control instanceof FormGroup) {        
+      this.validateAllFormFields(control);            
+    }
+  });
+}
+
+  get name() { return this.taskForm.get('name'); }
+  get endDate() { return this.taskForm.get('endDate'); }
+  get categoryv() { return this.taskForm.get('category'); }
 
   getCategorys(): void {
     let tempCategorys: Category[] = [];
@@ -102,6 +117,8 @@ export class TaskFormComponent implements OnInit {
             this.hideForm.emit('hide');
           }
           
+        } else {
+          this.validateAllFormFields(this.taskForm);
         }
       }
     }
