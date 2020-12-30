@@ -18,6 +18,7 @@ import { CategorysComponent } from './components/categorys/categorys.component';
 import { CategorysFormComponent } from './components/categorys-form/categorys-form.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TaskFormComponent } from './components/task-form/task-form.component';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { TaskFormComponent } from './components/task-form/task-form.component';
     CategorysComponent,
     CategorysFormComponent,
     TaskFormComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

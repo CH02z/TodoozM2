@@ -97,6 +97,32 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  taskEndsToday(endDate: string | undefined): boolean {
+    const dateObj = new Date();
+    const month = dateObj.getUTCMonth() + 1; //months from 1-12
+    const day = dateObj.getUTCDate() - 1;
+    const year = dateObj.getUTCFullYear();
+    const newdate = year + "-" + month + "-" + day;
+    return newdate == endDate ? false : true;
+  }
+
+  containsEndingToday(): boolean {
+    let containsEndingToday = false;
+    if (this.tasks?.length !== 0 && this.tasks) {
+      this.tasks.forEach(element => {
+        const dateObj = new Date();
+        const month = dateObj.getUTCMonth() + 1; //months from 1-12
+        const day = dateObj.getUTCDate();
+        const year = dateObj.getUTCFullYear();
+        const newdate = year + "-" + month + "-" + day;
+        if (element.endDate == newdate && !element.isDone) {
+          containsEndingToday = true;
+        }
+      });
+    }
+    return containsEndingToday;
+  }
+
   containsHighPriority(): boolean {
     let containsHighPriority = false;
     if (this.tasks?.length !== 0 && this.tasks) {
