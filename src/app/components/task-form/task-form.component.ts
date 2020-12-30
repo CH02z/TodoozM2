@@ -92,7 +92,7 @@ export class TaskFormComponent implements OnInit {
       this.taskForm = this.formBuilder.group({
         taskID: [''],
         name: ['', Validators.required],
-        endDate: ['', [Validators.required]],
+        endDate: ['', [Validators.required, this.dateValidator]],
         category: ['', [Validators.required]],
         highPriority: [''],
         description: ['']
@@ -107,7 +107,7 @@ export class TaskFormComponent implements OnInit {
       this.taskForm = this.formBuilder.group({
         taskID: [this.editTask.id],
         name: [this.editTask.name, Validators.required],
-        endDate: [this.editTask.endDate, [Validators.required]],
+        endDate: [this.editTask.endDate, [Validators.required, this.dateValidator]],
         category: [this.editTask.category, [Validators.required]],
         highPriority: [this.editTask.highPriority],
         description: [this.editTask.description]
