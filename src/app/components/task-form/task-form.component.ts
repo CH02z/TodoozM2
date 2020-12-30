@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Category } from 'src/app/models/Category';
 import { Task } from 'src/app/models/Task';
 import { CategoryService } from 'src/app/Services/category.service';
@@ -45,6 +45,18 @@ export class TaskFormComponent implements OnInit {
     });
   }
 
+  dateValidator(control: AbstractControl): {[key: string]: any} | null  {
+    const dateObj = new Date();
+    const month = dateObj.getUTCMonth() + 1; //months from 1-12
+    const day = dateObj.getUTCDate();
+    const year = dateObj.getUTCFullYear();
+    const newdate = year + "-" + month + "-" + day;
+    if (control.value < newdate) {
+      return { 'dateInvalid': true };
+    }
+    return null;
+  }
+
   validateAllFormFields(formGroup: FormGroup) {
   Object.keys(formGroup.controls).forEach(field => {  
     const control = formGroup.get(field);             
@@ -55,6 +67,8 @@ export class TaskFormComponent implements OnInit {
     }
   });
 }
+
+
 
   get name() { return this.taskForm.get('name'); }
   get endDate() { return this.taskForm.get('endDate'); }
@@ -78,7 +92,7 @@ export class TaskFormComponent implements OnInit {
       this.taskForm = this.formBuilder.group({
         taskID: [''],
         name: ['', Validators.required],
-        endDate: ['', [Validators.required]],
+        endDate: ['', [Validators.required, this.dateValidator]],
         category: ['', [Validators.required]],
         highPriority: [''],
         description: ['']
@@ -93,7 +107,7 @@ export class TaskFormComponent implements OnInit {
       this.taskForm = this.formBuilder.group({
         taskID: [this.editTask.id],
         name: [this.editTask.name, Validators.required],
-        endDate: [this.editTask.endDate, [Validators.required]],
+        endDate: [this.editTask.endDate, [Validators.required, this.dateValidator]],
         category: [this.editTask.category, [Validators.required]],
         highPriority: [this.editTask.highPriority],
         description: [this.editTask.description]

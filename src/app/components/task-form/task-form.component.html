@@ -25,6 +25,9 @@
     <div *ngIf="endDate?.errors?.required">
       Ein Enddatum muss gewählt werden.
     </div>
+    <div *ngIf="endDate?.errors?.dateInvalid && !endDate?.errors?.required">
+      Datum darf nicht in der Vergangenheit liegen
+    </div>
     </div>
   </div>
 
