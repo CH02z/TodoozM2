@@ -11,9 +11,9 @@
         <br>
         <div class="card">
           <article class="card-body">
-            <h4 class="card-title text-center mb-4 mt-1" style="color: #3B474F;">Login
+            <h4 class="card-title text-center mb-4 mt-1" style="color: #3B474F;">{{ 'login.login' | translate }}
             </h4>
-            <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/signup" routerLinkActive="active">Noch kein Account? <strong>Registriere dich hier...</strong></a></p>
+            <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/signup" routerLinkActive="active">{{ 'login.noacc' | translate }}</a></p>
             <hr>
             <form #formData="ngForm" (submit)="onSubmit(formData)">
               <!-- email input---------------->
@@ -26,7 +26,7 @@
                       </svg>
                     </span>
                   </div>
-                  <input class="form-control" name="email" [(ngModel)]="email" placeholder="Email" type="email" required>
+                  <input class="form-control" name="email" [(ngModel)]="email" placeholder="{{ 'login.email' | translate }}" type="email" required>
                 </div>
               </div>
               <!---------------------------->
@@ -46,16 +46,16 @@
                       </svg>
                     </span>
                   </div>
-                  <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="Passwort" required>
+                  <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="{{ 'login.password' | translate }}" required>
                 </div>
               </div>
               <!---------------------------->
 
               <div class="form-group">
-                <button type="submit" class="btn btn-info btn-block">Login</button>
+                <button type="submit" class="btn btn-info btn-block">{{ 'login.login' | translate }}</button>
               </div>
 
-              <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/resetpw" routerLinkActive="active">Passwort vergessen? <strong>hier zurücksetzen...</strong></a></p>
+              <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/resetpw" routerLinkActive="active">{{ 'login.forgPasswd' | translate }}</a></p>
             </form>
 
 

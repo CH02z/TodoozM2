@@ -1,0 +1,10 @@
+{
+    "login": {
+        "email": "email",
+        "password": "password",
+        "login": "Login",
+        "logout": "logout",
+        "noacc": "No account yet? Sign up here...",
+        "forgPasswd": "Forgot password? Reset it here..."
+    }
+}
