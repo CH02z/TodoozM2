@@ -4,24 +4,34 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { TranslateService } from '@ngx-translate/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'todooz2';
 
-  constructor(public authService: AuthService, private router: Router, public af: AngularFireAuth, public translate: TranslateService) {
+
+export class AppComponent {
+
+  title = 'todooz2';
+  uid = '';
+  selectedLang: string = "";
+  LangConf?: any;
+
+  constructor(public authService: AuthService,
+              public af: AngularFireAuth,
+              public translate: TranslateService,
+              private db: AngularFirestore) {
      // this language will be used as a fallback when a translation isn't found in the current language
-     translate.setDefaultLang('en');
-     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    translate.use('en');
+     
     
     this.af.authState.subscribe(user => {
       if (user) {
-        //do smt
+        this.uid = user.uid;
+        this.setDefaulLang();
       }
     });
   }
@@ -29,11 +39,37 @@ export class AppComponent {
   ngOnInit(): void {
   }
 
-  logout(): void {
-    this.authService.logout();
-    setTimeout(() => {
-      this.router.navigateByUrl('/login');
-    }, 2000);
-
+  selectLang(lang: string) {
+    let userLang = {"defaultLanguage": lang};
+    this.db.collection('users').doc(this.uid).set(userLang);
+    if (lang == 'de') {
+      this.selectedLang = 'Deutsch';
+    } else {
+      this.selectedLang = 'English';
+    }
+    this.translate.use(lang);
   }
+
+  setDefaulLang() {
+    this.db.collection('users').doc(this.uid).snapshotChanges().subscribe(
+      element => {
+        if (element) {
+          this.LangConf = element.payload.data()
+          if (this.LangConf !== undefined) {
+            this.selectLang(this.LangConf.defaultLanguage);
+          }
+          
+        } else {
+          this.translate.use('en');
+          let userLang = {"defaultLanguage": 'en'};
+          this.db.collection('users').doc(this.uid).set(userLang);
+        }
+      }
+    )
+  }
+
+
+
+
+
 }

@@ -1,10 +1,56 @@
 {
-    "login": {
+    "auth": {
         "email": "email",
         "password": "password",
         "login": "Login",
         "logout": "logout",
-        "noacc": "No account yet? Sign up here...",
-        "forgPasswd": "Forgot password? Reset it here..."
+        "signup": "Sign up",
+        "alrreg": "Already signed up? Login here",
+        "noacc": "No account yet? Sign up here",
+        "forgPasswd": "Forgot password? Reset it here",
+        "resetpw": "Reset password",
+        "Didntforg": "Didn't forget password? Login here",
+        "reset": "reset",
+        "LoggedInAs": "Logged in as",
+        "chooseLang": "choose language"
+    },
+    "todo": {
+        "addTask": "Add Task",
+        "editTask": "Edit Task",
+        "editCat": "Edit Category",
+        "search": "search",
+        "highPrio": "High Priority",
+        "critical": "critical",
+        "finishedTasks": "Finished Tasks",
+        "created": "created",
+        "enddate": "end date",
+        "category": "category",
+        "categorys": "Categorys",
+        "description": "description",
+        "add": "add",
+        "addCategory": "add category",
+        "back": "back",
+        "noCategoryYet": "No category added yet",
+        "alertFirstCategory": "In order to add a task, you have to create a Category first",
+        "important": "important",
+        "menu": "menu"
+    },
+    "form": {
+        "task": "Task",
+        "donetill": "Has to be done till",
+        "category": "Category",
+        "highPrio": "High Priority",
+        "optional": "Optional",
+        "validateName": "A name is required",
+        "validateDatereq": "A date is required",
+        "validateDate": "Cannot choose a past date",
+        "validateCategory": "A category is required",
+        "save": "save",
+        "close": "close",
+        "edit": "edit",
+        "reset": "reset",
+        "name": "name",
+        "description": "description"
+
     }
 }

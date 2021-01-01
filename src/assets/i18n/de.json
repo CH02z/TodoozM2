@@ -1,0 +1,56 @@
+{
+    "auth": {
+        "email": "Email",
+        "password": "Passwort",
+        "login": "Anmelden",
+        "logout": "Abmelden",
+        "signup": "Registrieren",
+        "alrreg": "Bereits registriert? Hier anmelden",
+        "noacc": "Noch kein Account? Hier registrieren",
+        "forgPasswd": "Forgot password? Reset it here",
+        "resetpw": "Passwort zurücksetzen",
+        "Didntforg": "Passwort doch nicht vergessen? Hier anmelden",
+        "reset": "zurücksetzen",
+        "LoggedInAs": "Angemeldet als",
+        "chooseLang": "Sprache wählen"
+    },
+    "todo": {
+        "addTask": "Aufgabe hinzufügen",
+        "editTask": "Aufgabe bearbeiten",
+        "editCat": "Kategorie bearbeiten",
+        "search": "suchen",
+        "highPrio": "Hohe Priorität",
+        "critical": "Kritisch",
+        "finishedTasks": "Erledigte Aufgaben",
+        "created": "erstellt",
+        "enddate": "Zieldatum",
+        "category": "Kategorie",
+        "categorys": "Kategorien",
+        "description": "Beschreibung",
+        "add": "hinzufügen",
+        "addCategory": "Kategorie hinzufügen",
+        "back": "zurück",
+        "noCategoryYet": "Noch keine Kategorie erstellt",
+        "alertFirstCategory": "Um eine Aufgabe hinzufügen zu können, musst du zuerst eine Kategorie erstellen",
+        "important": "Wichtig",
+        "menu": "Menü"
+    },
+    "form": {
+        "task": "Aufgabe",
+        "donetill": "Zu erledigen bis",
+        "category": "Kategorie",
+        "highPrio": "Hohe Priorität",
+        "optional": "Optional",
+        "validateName": "Ein Name wird benötigt",
+        "validateDatereq": "Ein Datum wird benötigt",
+        "validateDate": "Das Datum darf nicht in der Vergangenheit liegen",
+        "validateCategory": "Eine Kategorie wird benötigt",
+        "save": "speichern",
+        "close": "schliessen",
+        "edit": "bearbeiten",
+        "reset": "zurücksetzen",
+        "name": "Name",
+        "description": "Beschreibung"
+
+    }
+}

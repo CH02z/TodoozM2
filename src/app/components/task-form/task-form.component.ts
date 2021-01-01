@@ -46,11 +46,23 @@ export class TaskFormComponent implements OnInit {
   }
 
   dateValidator(control: AbstractControl): {[key: string]: any} | null  {
+    let stringMonth = "";
+    let stringDay = "";
     const dateObj = new Date();
     const month = dateObj.getUTCMonth() + 1; //months from 1-12
+    if (month.toString().length == 1) {
+      stringMonth = "0" + month.toString();
+    } else {
+      stringMonth = stringMonth + month;
+    }
     const day = dateObj.getUTCDate();
+    if (day.toString().length == 1) {
+      stringDay = "0" + day.toString();
+    } else {
+      stringDay = stringDay + day;
+    }
     const year = dateObj.getUTCFullYear();
-    const newdate = year + "-" + month + "-" + day;
+    const newdate = year + "-" + stringMonth + "-" + stringDay;
     if (control.value < newdate) {
       return { 'dateInvalid': true };
     }

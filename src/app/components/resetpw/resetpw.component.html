@@ -11,8 +11,8 @@
         <br>
         <div class="card">
           <article class="card-body">
-            <h4 class="card-title text-center mb-4 mt-1" style="color: #3B474F;">Passwort zurücksetzen</h4>
-            <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/login" routerLinkActive="active">Doch nicht vergessen? <strong>hier anmelden...</strong></a></p>
+            <h4 class="card-title text-center mb-4 mt-1" style="color: #3B474F;">{{ 'auth.resetpw' | translate }}</h4>
+            <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/login" routerLinkActive="active">{{ 'auth.Didntforg' | translate }}...</a></p>
             <hr>
             <form #formData="ngForm" (submit)="sendResetEmail()">
               <div class="form-group">
@@ -24,12 +24,12 @@
                       </svg>
                     </span>
                   </div>
-                  <input class="form-control" name="email" [(ngModel)]="email" placeholder="Email" type="email" required>
+                  <input class="form-control" name="email" [(ngModel)]="email" placeholder="{{ 'auth.email' | translate }}" type="email" required>
                 </div>
               </div>
               <div class="form-group">
 
-                <button type="submit" [disabled]="!formData.valid" class="btn btn-info btn-block">zurücksetzen</button>
+                <button type="submit" [disabled]="!formData.valid" class="btn btn-info btn-block">{{ 'form.reset' | translate }}</button>
 
               </div>
 
