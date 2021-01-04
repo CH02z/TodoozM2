@@ -83,7 +83,6 @@ export class HomeComponent implements OnInit {
   onDelete(taskID: string | undefined): void {
     if (taskID) {
       this.taskService.DeleteTask(taskID);
-      window.alert('Aufgabe erfolreich gelöscht!');
     }
   }
 
@@ -102,13 +101,14 @@ export class HomeComponent implements OnInit {
     let stringMonth = "";
     let stringDay = "";
     const dateObj = new Date();
+    dateObj.setDate(dateObj.getDate() + 1);
     const month = dateObj.getUTCMonth() + 1; //months from 1-12
     if (month.toString().length == 1) {
       stringMonth = "0" + month.toString();
     } else {
       stringMonth = stringMonth + month;
     }
-    const day = dateObj.getUTCDate() -1;
+    const day = dateObj.getUTCDate();
     if (day.toString().length == 1) {
       stringDay = "0" + day.toString();
     } else {
@@ -126,13 +126,14 @@ export class HomeComponent implements OnInit {
         let stringMonth = "";
         let stringDay = "";
         const dateObj = new Date();
+        dateObj.setDate(dateObj.getDate() + 1);
         const month = dateObj.getUTCMonth() + 1; //months from 1-12
         if (month.toString().length == 1) {
           stringMonth = "0" + month.toString();
         } else {
           stringMonth = stringMonth + month;
         }
-        const day = dateObj.getUTCDate() - 1;
+        const day = dateObj.getUTCDate();
         if (day.toString().length == 1) {
           stringDay = "0" + day.toString();
         } else {
@@ -203,9 +204,15 @@ export class HomeComponent implements OnInit {
   logout(): void {
     this.authService.logout();
     setTimeout(() => {
-      this.router.navigateByUrl('/login');
+      if (this.router.url != "/resetpw") {
+        this.router.navigateByUrl('/login');
+      }
     }, 2000);
+  }
 
+  resetPW(): void {
+    this.router.navigateByUrl('resetpw')
+    this.logout();
   }
 
 }
