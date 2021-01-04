@@ -6,7 +6,7 @@ import { Task } from './models/Task';
 })
 export class SearchPipe implements PipeTransform {
 
-  transform(tasks: Task[], searchTerm: string) {
+  transform(tasks: Task[] | undefined, searchTerm: string | undefined) {
     if (!tasks || !searchTerm) {
       return tasks;
     }

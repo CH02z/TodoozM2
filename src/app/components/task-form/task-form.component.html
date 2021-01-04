@@ -5,34 +5,34 @@
   </div>
   
   <div class="form-group">
-    <label>Aufgabe</label>
-    <input type="text" class="form-control" [ngClass]="{'is-invalid': name?.invalid && (name?.dirty || name?.touched)}" formControlName="name" placeholder="Name">
+    <label>{{ 'form.task' | translate }}:</label>
+    <input type="text" class="form-control" [ngClass]="{'is-invalid': name?.invalid && (name?.dirty || name?.touched)}" formControlName="name" placeholder="{{ 'form.name' | translate }}">
     <div *ngIf="name?.invalid && (name?.dirty || name?.touched)"
       class="text-danger">
   
     <div *ngIf="name?.errors?.required">
-      Ein name wird benötigt.
+      {{ 'form.validateName' | translate }}.
     </div>
     </div>
   </div>
 
   <div class="form-group">
-    <label>Zu erledigen bis</label>
+    <label>{{ 'form.donetill' | translate }}:</label>
     <input type="date" class="form-control" [ngClass]="{'is-invalid': endDate?.invalid && (endDate?.dirty || endDate?.touched)}" formControlName="endDate" placeholder="Datum">
     <div *ngIf="endDate?.invalid && (endDate?.dirty || endDate?.touched)"
       class="text-danger">
   
     <div *ngIf="endDate?.errors?.required">
-      Ein Enddatum muss gewählt werden.
+      {{ 'form.validateDatereq' | translate }}.
     </div>
     <div *ngIf="endDate?.errors?.dateInvalid && !endDate?.errors?.required">
-      Datum darf nicht in der Vergangenheit liegen
+      {{ 'form.validateDate' | translate }}.
     </div>
     </div>
   </div>
 
   <div class="form-group">
-    <label for="exampleFormControlSelect1">Kategorie</label>
+    <label for="exampleFormControlSelect1">{{ 'form.category' | translate }}:</label>
     <select class="form-control" [ngClass]="{'is-invalid': categoryv?.invalid && (categoryv?.dirty || categoryv?.touched)}" id="exampleFormControlSelect1" formControlName="category">
       <option *ngFor="let category of categorys" [value]="category.name">{{category.name}}</option>
     </select>
@@ -40,23 +40,23 @@
     class="text-danger">
 
     <div *ngIf="categoryv?.errors?.required">
-      Eine Kategorie muss gewählt werden.
+      {{ 'form.validateCategory' | translate }}.
     </div>
     </div>
   </div>
 
   <div class="custom-control custom-checkbox">
     <input type="checkbox" class="custom-control-input" formControlName="highPriority" id="defaultChecked2" checked>
-    <label class="custom-control-label" for="defaultChecked2">hohe Priorität</label>
+    <label class="custom-control-label" for="defaultChecked2">{{ 'form.highPrio' | translate }}</label>
   </div>
 
   <br>
 
   <div class="form-group">
-    <label>optional:</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description" placeholder="Beischreibung"></textarea>
+    <label>{{ 'form.optional' | translate }}:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description" placeholder="{{ 'form.description' | translate }}"></textarea>
   </div>
 
-  <button type="button" (click)="onSubmit()" class="btn btn-info btn-sm">speichern</button>
+  <button type="button" (click)="onSubmit()" class="btn btn-info btn-sm">{{ 'form.save' | translate }}</button>
 
 </form>

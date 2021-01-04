@@ -3,10 +3,14 @@
 
 <div class="container" *ngIf="authService.user | async">
 
+  <h4>{{ 'todo.categorys' | translate }}</h4>
+
+  <br>
+
 
 <ng-template #categoryModal>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Kategorie Hinzufügen</h4>
+    <h4 class="modal-title pull-left">{{ 'todo.addCategory' | translate }}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -17,7 +21,7 @@
 </ng-template>
 
 
-  <p *ngIf="categorys?.length === 0">Noch keine Kategorien hinzugefügt...</p>
+  <p *ngIf="categorys?.length === 0">{{ 'todo.noCategoryYet' | translate }}...</p>
 
 
   <ul class="list-group">
@@ -31,8 +35,8 @@
   <br>
 
 
-  <button type="button" class="btn btn-secondary btn-sm" routerLink="/home" style="margin-right: 10px;">zurück</button>
-  <button type="button" class="btn btn-info btn-sm" (click)="openModal(categoryModal)">hinzufügen</button>
+  <button type="button" class="btn btn-secondary btn-sm" routerLink="/home" style="margin-right: 10px;">{{ 'todo.back' | translate }}</button>
+  <button type="button" class="btn btn-info btn-sm" (click)="openModal(categoryModal)">{{ 'todo.addCategory' | translate }}</button>
 
 
 </div>

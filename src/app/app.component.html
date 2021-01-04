@@ -1,10 +1,28 @@
 <!-- Navbar-------------------------------------------------------------------------------------------->
 <nav class="navbar navbar-light bg-light" style="border-bottom: 1px solid rgb(197, 197, 197);">
     <a class="navbar-brand" href="#">
-      <img src="../../../assets/img/todooz.png" height="50px" alt="">
+      <img src="../../../assets/img/logo.png" height="50px" alt="">
     </a>
   
-    <button type="button" class="btn btn-outline-secondary btn-sm" (click)="logout()">abmelden</button>
+    <div class="dropdown" *ngIf="authService.user | async">
+      <button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        <span *ngIf="langService.selectedLang.length !== 0">
+          {{langService.selectedLang}}
+        </span>
+        <span *ngIf="langService.selectedLang.length === 0">
+          {{ 'auth.chooseLang' | translate }}
+        </span>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+          <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+        </svg>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" (click)="langService.selectLang('en')">English</a></li>
+        <li><a class="dropdown-item" (click)="langService.selectLang('de')">Deutsch</a></li>
+      </ul>
+    </div>
+    <!-- <button type="button" class="btn btn-outline-secondary btn-sm" (click)="logout()">{{ 'auth.logout' | translate }}</button> -->
   
   </nav>
   

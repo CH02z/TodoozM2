@@ -11,8 +11,8 @@
         <br>
         <div class="card">
           <article class="card-body">
-            <h4 class="card-title text-center mb-4 mt-1" style="color: #3B474F;">Registrieren</h4>
-            <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/login" routerLinkActive="active">Bereits registriert? <strong>hier anmelden...</strong></a></p>
+            <h4 class="card-title text-center mb-4 mt-1" style="color: #3B474F;">{{ 'auth.signup' | translate }}</h4>
+            <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/login" routerLinkActive="active">{{ 'auth.alrreg' | translate }}...</a></p>
             <hr>
             <form #formData="ngForm" (submit)="onSubmit(formData)">
               <!-- email input---------------->
@@ -25,7 +25,7 @@
                       </svg>
                     </span>
                   </div>
-                  <input class="form-control" name="email" [(ngModel)]="email" placeholder="Email" type="email" required>
+                  <input class="form-control" name="email" [(ngModel)]="email" placeholder="{{ 'auth.email' | translate }}" type="email" required>
                 </div>
               </div>
               <!-- passwort input---------------->
@@ -41,13 +41,13 @@
                       </svg>
                     </span>
                   </div>
-                  <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="Passwort" required>
+                  <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="{{ 'auth.password' | translate }}" required>
                 </div>
               </div>
               <!---------------------------->
               <div class="form-group">
 
-                <button type="submit" [disabled]="!formData.valid" class="btn btn-info btn-block">Registrieren</button>
+                <button type="submit" [disabled]="!formData.valid" class="btn btn-info btn-block">{{ 'auth.signup' | translate }}</button>
 
               </div>
 

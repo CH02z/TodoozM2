@@ -3,20 +3,37 @@
 <br>
 
 <div class="container">
-  <p>Angemeldet als, {{ email }} </p>
+  <span>
+    <div class="dropdown">
+      {{ 'auth.LoggedInAs' | translate }}:
+      <button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ email }} 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+          <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+        </svg>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" style="cursor: pointer;" (click)="logout()">{{ 'auth.logout' | translate }}</a></li>
+        <li><a class="dropdown-item" style="cursor: pointer;" (click)="resetPW()">{{ 'auth.resetpw' | translate }}</a></li>
+      </ul>
+    </div>
+
+
+  </span>
+ 
 
   <br>
 
   <div *ngIf="categorys?.length === 0">
-    <p> <b>Wichtig:</b> Um Aufgabe erstellen zu können musst du zuerst eine Kategorie hinzufügen</p>
-    <button type="button" class="btn btn-info btn-sm" routerLink="/categorys">Kategorien Menü</button>
+    <p> <b>{{ 'todo.important' | translate }}:</b> {{ 'todo.alertFirstCategory' | translate }}.</p>
+    <button type="button" class="btn btn-info btn-sm" routerLink="/categorys">{{ 'todo.categorys' | translate }} {{ 'todo.menu' | translate }}</button>
   </div>
   
   <br *ngIf="categorys?.length === 0">
 
   <ng-template #taskModal>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">Aufgabe hinzufügen</h4>
+      <h4 class="modal-title pull-left">{{ 'todo.addTask' | translate }}</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -29,7 +46,7 @@
   <ng-template #taskDetail>
     <div class="modal-header">
       <h4 *ngIf="!showEditForm" class="modal-title pull-left">{{detailTask.name}}</h4>
-      <h4 *ngIf="showEditForm" class="modal-title pull-left">Aufgabe bearbeiten</h4>
+      <h4 *ngIf="showEditForm" class="modal-title pull-left">{{ 'todo.editTask' | translate }}</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef?.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -38,8 +55,8 @@
       <app-task-detail *ngIf="!showEditForm" [task]="detailTask"></app-task-detail>
       <app-task-form *ngIf="showEditForm" [editTask]="detailTask" (closeModal)="closeModal($event)" (hideForm)="hideForm($event)"></app-task-form>
       <div *ngIf="!showEditForm">
-        <button type="button" class="btn btn-secondary btn-sm" (click)="modalRef?.hide()" style="margin-right: 10px;">schliessen</button>
-        <button type="button" class="btn btn-info btn-sm" (click)="showEditForm = !showEditForm">bearbeiten</button>
+        <button type="button" class="btn btn-secondary btn-sm" (click)="modalRef?.hide()" style="margin-right: 10px;">{{ 'form.close' | translate }}</button>
+        <button type="button" class="btn btn-info btn-sm" (click)="showEditForm = !showEditForm">{{ 'form.edit' | translate }}</button>
       </div>
       
       
@@ -60,7 +77,7 @@
               <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
               <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
             </svg>
-            Aufgabe Hinzufügen
+            {{ 'todo.addTask' | translate }}
           </div>
         </div>
       </div>
@@ -71,7 +88,7 @@
               <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
             </svg>
-            Kategorien Bearbeiten
+            {{ 'todo.editCat' | translate }}
           </div>
         </div>
       </div>
@@ -81,17 +98,18 @@
     <br>
   
      <!-- Suchfeld -->
-    <input type="text" class="form-control" placeholder="Suchen..." [(ngModel)]="searchTerm">
+    <input type="text" class="form-control" placeholder="{{ 'todo.search' | translate }}..." [(ngModel)]="searchTerm">
   
    <br>
 
+   <!-- critical tsasks (one day befor enddate) -->
    <div *ngIf="containsEndingToday()">
-    <h4>Kritisch</h4>
-    <div class="card" *ngFor="let task of tasks | search:searchTerm" [ngClass]="{'hidden': taskEndsToday(task.endDate) || task.isDone}" style="background-color: #c62b2b; color: white">
+    <h4>{{ 'todo.critical' | translate }}</h4>
+    <div class="card" *ngFor="let task of tasks | search:searchTerm" [ngClass]="{'hidden': !taskEndsToday(task.endDate) || task.isDone}" style="background-color: #c62b2b; color: white">
      <input type="checkbox" (change)="onCheck(task.id)" id="checkbox" class="checkBoxTasks" style="margin-right: 10px; margin-top: 9px;">
      <div class="card-body" (click)="openModal(taskDetail)" (click)="openTaskDetail(task)" class="taskbody" style="width: 90%;">
        <h5 class="card-title" style="font-size: 16px;">{{task.name}}</h5>
-        <h6 class="card-text" style="font-size: 12px; color: white;">erstellt: {{task.dateDefined | date}} · Zieldatum: {{task.endDate | date}} · Kategorie: {{task.category}}</h6>
+        <h6 class="card-text" style="font-size: 12px; color: white;">{{ 'todo.created' | translate }}: {{task.dateDefined | date}} · {{ 'todo.enddate' | translate }}: {{task.endDate | date}} · {{ 'todo.category' | translate }}: {{task.category}}</h6>
        </div>
      </div>
    </div>
@@ -101,12 +119,12 @@
   
   <!-- high Priority Tasks -->
   <div *ngIf="containsHighPriority()">
-    <h4>Hohe Priorität</h4>
+    <h4>{{ 'todo.highPrio' | translate }}</h4>
     <div class="card" *ngFor="let task of tasks | search:searchTerm" [ngClass]="{'hidden': !task.highPriority || task.isDone}" style="background-color: #ffc44f; color: white">
      <input type="checkbox" (change)="onCheck(task.id)" id="checkbox" class="checkBoxTasks" style="margin-right: 10px; margin-top: 9px;">
      <div class="card-body" (click)="openModal(taskDetail)" (click)="openTaskDetail(task)" class="taskbody" style="width: 90%;">
        <h5 class="card-title" style="font-size: 16px;">{{task.name}}</h5>
-        <h6 class="card-text text-muted" style="font-size: 12px">erstellt: {{task.dateDefined | date}} · Zieldatum: {{task.endDate | date}} · Kategorie: {{task.category}}</h6>
+        <h6 class="card-text text-muted" style="font-size: 12px">{{ 'todo.created' | translate }}: {{task.dateDefined | date}} · {{ 'todo.enddate' | translate }}: {{task.endDate | date}} · {{ 'todo.category' | translate }}: {{task.category}}</h6>
        </div>
    </div>
   </div>
@@ -119,11 +137,11 @@
         <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
         <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
       </svg></h4>
-      <div class="card" *ngFor="let task of tasks | search:searchTerm" [ngClass]="{'hidden': task.category !== category.name || task.highPriority || task.isDone || !taskEndsToday(task.endDate)}">
+      <div class="card" *ngFor="let task of tasks | search:searchTerm" [ngClass]="{'hidden': task.category !== category.name || task.highPriority || task.isDone || taskEndsToday(task.endDate)}">
         <input type="checkbox" (change)="onCheck(task.id)" id="checkbox" class="checkBoxTasks" style="margin-right: 10px; margin-top: 9px;">
         <div class="card-body" (click)="openModal(taskDetail)" (click)="openTaskDetail(task)" class="taskbody" style="width: 90%;">
           <h5 class="card-title" style="font-size: 16px;">{{task.name}}</h5>
-           <h6 class="card-text text-muted" style="font-size: 12px">erstellt: {{task.dateDefined | date}} · Zieldatum: {{task.endDate | date}}</h6>
+           <h6 class="card-text text-muted" style="font-size: 12px">{{ 'todo.created' | translate }}: {{task.dateDefined | date}} · {{ 'todo.enddate' | translate }}: {{task.endDate | date}}</h6>
           </div>
       </div>
     </div>
@@ -132,7 +150,7 @@
     <hr>
 
     <button class="btn btn-info btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#deletedTasks" aria-expanded="false" aria-controls="deletedTasks">
-      erledigte Aufgaben
+      {{ 'todo.finishedTasks' | translate }}
     </button>
 
     <div class="collapse" id="deletedTasks">

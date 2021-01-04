@@ -2,10 +2,10 @@
 
     <input type= "hidden" class="form-control" name="id" [(ngModel)]="selecteCategory.id">
     <div class="form-group">
-      <input type="text" class="form-control" name="name" [(ngModel)]="selecteCategory.name" placeholder="Name" required>
+      <input type="text" class="form-control" name="name" [(ngModel)]="selecteCategory.name" placeholder="{{ 'form.name' | translate }}" required>
     </div>
 
-      <button id="taskSubmit" type="submit" class="btn btn-info btn-sm" [disabled]="!categoryForm.valid">speichern</button>
-      <button id="taskReset" type="button" class="btn btn-secondary btn-sm" (click)="resetForm(categoryForm)" style="margin-left: 10px;">zurücksetzen</button>
+      <button id="taskSubmit" type="submit" class="btn btn-info btn-sm" [disabled]="!categoryForm.valid">{{ 'form.save' | translate }}</button>
+      <button id="taskReset" type="button" class="btn btn-secondary btn-sm" (click)="resetForm(categoryForm)" style="margin-left: 10px;">{{ 'form.reset' | translate }}</button>
 
     </form>

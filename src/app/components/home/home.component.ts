@@ -30,7 +30,8 @@ export class HomeComponent implements OnInit {
               public af: AngularFireAuth,
               private categoryService: CategoryService,
               private taskService: TaskService,
-              private modalService: BsModalService,) {
+              private modalService: BsModalService,
+              private router: Router) {
     this.af.authState.subscribe(user => {
       if (user) {
         this.email = user.email;
@@ -82,7 +83,6 @@ export class HomeComponent implements OnInit {
   onDelete(taskID: string | undefined): void {
     if (taskID) {
       this.taskService.DeleteTask(taskID);
-      window.alert('Aufgabe erfolreich gelöscht!');
     }
   }
 
@@ -98,23 +98,49 @@ export class HomeComponent implements OnInit {
   }
 
   taskEndsToday(endDate: string | undefined): boolean {
+    let stringMonth = "";
+    let stringDay = "";
     const dateObj = new Date();
+    dateObj.setDate(dateObj.getDate() + 1);
     const month = dateObj.getUTCMonth() + 1; //months from 1-12
-    const day = dateObj.getUTCDate() - 1;
+    if (month.toString().length == 1) {
+      stringMonth = "0" + month.toString();
+    } else {
+      stringMonth = stringMonth + month;
+    }
+    const day = dateObj.getUTCDate();
+    if (day.toString().length == 1) {
+      stringDay = "0" + day.toString();
+    } else {
+      stringDay = stringDay + day;
+    }
     const year = dateObj.getUTCFullYear();
-    const newdate = year + "-" + month + "-" + day;
-    return newdate == endDate ? false : true;
+    const newdate = year + "-" + stringMonth + "-" + stringDay;
+    return newdate == endDate ? true : false;
   }
 
   containsEndingToday(): boolean {
     let containsEndingToday = false;
     if (this.tasks?.length !== 0 && this.tasks) {
       this.tasks.forEach(element => {
+        let stringMonth = "";
+        let stringDay = "";
         const dateObj = new Date();
+        dateObj.setDate(dateObj.getDate() + 1);
         const month = dateObj.getUTCMonth() + 1; //months from 1-12
+        if (month.toString().length == 1) {
+          stringMonth = "0" + month.toString();
+        } else {
+          stringMonth = stringMonth + month;
+        }
         const day = dateObj.getUTCDate();
+        if (day.toString().length == 1) {
+          stringDay = "0" + day.toString();
+        } else {
+          stringDay = stringDay + day;
+        }
         const year = dateObj.getUTCFullYear();
-        const newdate = year + "-" + month + "-" + day;
+        const newdate = year + "-" + stringMonth + "-" + stringDay;
         if (element.endDate == newdate && !element.isDone) {
           containsEndingToday = true;
         }
@@ -173,6 +199,20 @@ export class HomeComponent implements OnInit {
       this.modalRef?.hide();
       this.selectedCategory = '';
     }
+  }
+
+  logout(): void {
+    this.authService.logout();
+    setTimeout(() => {
+      if (this.router.url != "/resetpw") {
+        this.router.navigateByUrl('/login');
+      }
+    }, 2000);
+  }
+
+  resetPW(): void {
+    this.router.navigateByUrl('resetpw')
+    this.logout();
   }
 
 }

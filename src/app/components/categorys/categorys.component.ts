@@ -87,7 +87,6 @@ export class CategorysComponent implements OnInit {
     if (categoryID !== undefined) {
       this.categoryService.DeleteCategory(categoryID);
     }
-    window.alert('Kategorie erfolreich gelöscht!');
   }
 
   openModal(template: TemplateRef<any>) {

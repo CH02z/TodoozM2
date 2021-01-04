@@ -27,7 +27,7 @@ export class CategorysFormComponent implements OnInit {
     if (form.valid) {
       this.categoryService.CreateCategory(this.selecteCategory);
       this.closeModal.emit('hide');
-      window.alert('Kategorie: ' + this.selecteCategory.name + ' erfolreich hinzugefügt!');
+      //window.alert('Kategorie: ' + this.selecteCategory.name + ' erfolreich hinzugefügt!');
       this.resetForm(form);
     }
    
