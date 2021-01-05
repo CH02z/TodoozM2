@@ -7,6 +7,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TaskService } from 'src/app/Services/task.service';
 import { Task } from 'src/app/models/Task';
 import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categorys',
@@ -24,7 +25,8 @@ export class CategorysComponent implements OnInit, OnDestroy {
               public af: AngularFireAuth,
               private categoryService: CategoryService,
               private taskService: TaskService,
-              private modalService: BsModalService) {
+              private modalService: BsModalService,
+              private translate: TranslateService) {
                 this.subscriptions.push(
                   this.af.authState.subscribe(user => {
                     if (user) {
@@ -98,6 +100,7 @@ export class CategorysComponent implements OnInit, OnDestroy {
   onDelete(categoryID: string | undefined): void {
     if (categoryID !== undefined) {
       this.categoryService.DeleteCategory(categoryID);
+      window.alert(this.translate.instant('todo.category') + " " + this.translate.instant('todo.deleted') + ".");
     }
   }
 

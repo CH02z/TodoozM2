@@ -4,6 +4,7 @@
         "password": "password",
         "login": "Login",
         "logout": "logout",
+        "loggedout": "logged out",
         "signup": "Sign up",
         "alrreg": "Already signed up? Login here",
         "noacc": "No account yet? Sign up here",
@@ -12,7 +13,10 @@
         "Didntforg": "Didn't forget password? Login here",
         "reset": "reset",
         "LoggedInAs": "Logged in as",
-        "chooseLang": "choose language"
+        "chooseLang": "choose language",
+        "successful": "successfully",
+        "resetMailSent":  "Mail to reset Password sent",
+        "missingMail": "Error: no email adress given"
     },
     "todo": {
         "addTask": "Add Task",
@@ -28,6 +32,8 @@
         "categorys": "Categorys",
         "description": "description",
         "add": "add",
+        "added": "added",
+        "deleted": "deleted",
         "addCategory": "add category",
         "back": "back",
         "noCategoryYet": "No category added yet",

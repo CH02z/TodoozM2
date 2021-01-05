@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { Category } from 'src/app/models/Category';
 import { AuthService } from 'src/app/Services/auth.service';
 import { CategoryService } from 'src/app/Services/category.service';
@@ -17,8 +18,9 @@ export class CategorysFormComponent implements OnInit {
   selecteCategory: Category = new Category();
 
   constructor(public authService: AuthService,
-    public af: AngularFireAuth,
-    private categoryService: CategoryService) {
+              public af: AngularFireAuth,
+              private categoryService: CategoryService,
+              private translate: TranslateService) {
     }
   ngOnInit(): void {
   }
@@ -27,7 +29,7 @@ export class CategorysFormComponent implements OnInit {
     if (form.valid) {
       this.categoryService.CreateCategory(this.selecteCategory);
       this.closeModal.emit('hide');
-      //window.alert('Kategorie: ' + this.selecteCategory.name + ' erfolreich hinzugefügt!');
+      window.alert(this.translate.instant('todo.category') + ": " + this.selecteCategory.name + " " + this.translate.instant('auth.successful') + " " + this.translate.instant('todo.added') + ".");
       this.resetForm(form);
     }
    

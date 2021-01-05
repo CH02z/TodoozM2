@@ -145,7 +145,6 @@ export class TaskFormComponent implements OnInit, OnDestroy {
           if (this.taskForm.value.taskID === "") {
             this.taskService.CreateTask(this.taskForm.value)
             this.closeModal.emit('hide');
-            //window.alert('Aufgabe: ' + this.taskForm.value.name + ' erfolreich hinzugefügt!');
             this.resetForm();
           } else {
             this.taskService.UpdateTask(this.taskForm.value);
