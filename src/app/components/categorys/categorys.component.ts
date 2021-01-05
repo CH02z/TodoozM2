@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Category } from 'src/app/models/Category';
@@ -6,61 +6,75 @@ import { CategoryService } from 'src/app/Services/category.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TaskService } from 'src/app/Services/task.service';
 import { Task } from 'src/app/models/Task';
+import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categorys',
   templateUrl: './categorys.component.html',
   styleUrls: ['./categorys.component.scss']
 })
-export class CategorysComponent implements OnInit {
+export class CategorysComponent implements OnInit, OnDestroy {
 
   categorys?: Category[];
   tasks?: Task[];
   modalRef?: BsModalRef;
+  private subscriptions: Subscription[] = [];
 
   constructor(public authService: AuthService,
               public af: AngularFireAuth,
               private categoryService: CategoryService,
               private taskService: TaskService,
-              private modalService: BsModalService) {
-                this.af.authState.subscribe(user => {
-                  if (user) {
-                    this.categorys = [];
-                    this.tasks = [];
-                    this.getCategorys();
-                    this.getTasks();
-            
-                  }
-                });
+              private modalService: BsModalService,
+              private translate: TranslateService) {
+                this.subscriptions.push(
+                  this.af.authState.subscribe(user => {
+                    if (user) {
+                      this.categorys = [];
+                      this.tasks = [];
+                      this.getCategorys();
+                      this.getTasks();
+              
+                    }
+                  })
+                ) 
               }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
   getCategorys(): void {
     let tempCategorys: Category[] = [];
-    this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
-      category.forEach(element => {
-        const y = element.payload.doc.data();
-        y['id'] = element.payload.doc.id;
-        tempCategorys.push(y as Category);
-      });
-      this.categorys = tempCategorys;
-      tempCategorys = []; //reset temp categorys
-    });
+    this.subscriptions.push(
+      this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
+        category.forEach(element => {
+          const y = element.payload.doc.data();
+          y['id'] = element.payload.doc.id;
+          tempCategorys.push(y as Category);
+        });
+        this.categorys = tempCategorys;
+        tempCategorys = []; //reset temp categorys
+      })
+    );
   }
 
   getTasks(): void {
     let tempTasks: Task[] = [];
-    this.taskService.GetTasks().snapshotChanges().subscribe(category => {
-      category.forEach(element => {
-        const y = element.payload.doc.data();
-        y['id'] = element.payload.doc.id;
-        tempTasks.push(y as Task);
-      });
-      this.tasks = tempTasks;
-      tempTasks = []; //reset temp tasks
-    });
+    this.subscriptions.push(
+      this.taskService.GetTasks().snapshotChanges().subscribe(category => {
+        category.forEach(element => {
+          const y = element.payload.doc.data();
+          y['id'] = element.payload.doc.id;
+          tempTasks.push(y as Task);
+        });
+        this.tasks = tempTasks;
+        tempTasks = []; //reset temp tasks
+      })
+    );
   }
 
   categoryIsUsed(category: string | undefined): boolean {
@@ -86,6 +100,7 @@ export class CategorysComponent implements OnInit {
   onDelete(categoryID: string | undefined): void {
     if (categoryID !== undefined) {
       this.categoryService.DeleteCategory(categoryID);
+      window.alert(this.translate.instant('todo.category') + " " + this.translate.instant('todo.deleted') + ".");
     }
   }
 

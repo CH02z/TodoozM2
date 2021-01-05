@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -7,13 +7,14 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Category } from 'src/app/models/Category';
 import { Task } from 'src/app/models/Task';
 import { TaskService } from 'src/app/Services/task.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   email: string | null = '';
   categorys?: Category[];
@@ -25,6 +26,8 @@ export class HomeComponent implements OnInit {
   formTask?: Task;
   selectedCategory?: string;
 
+  private subscriptions: Subscription[] = [];
+
 
   constructor(public authService: AuthService,
               public af: AngularFireAuth,
@@ -32,44 +35,54 @@ export class HomeComponent implements OnInit {
               private taskService: TaskService,
               private modalService: BsModalService,
               private router: Router) {
-    this.af.authState.subscribe(user => {
-      if (user) {
-        this.email = user.email;
-        this.categorys = [];
-        this.tasks = [];
-        this.getCategorys();
-        this.getTasks();
-      }
-    });
+    this.subscriptions.push(
+      this.af.authState.subscribe(user => {
+        if (user) {
+          this.email = user.email;
+          this.categorys = [];
+          this.tasks = [];
+          this.getCategorys();
+          this.getTasks();
+        }
+      })
+    );
   }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
   getCategorys(): void {
     let tempCategorys: Category[] = [];
-    this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
-      category.forEach(element => {
-        const y = element.payload.doc.data();
-        y['id'] = element.payload.doc.id;
-        tempCategorys.push(y as Category);
-      });
-      this.categorys = tempCategorys;
-      tempCategorys = []; //reset temp categorys
-    });
+    this.subscriptions.push(
+      this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
+        category.forEach(element => {
+          const y = element.payload.doc.data();
+          y['id'] = element.payload.doc.id;
+          tempCategorys.push(y as Category);
+        });
+        this.categorys = tempCategorys;
+        tempCategorys = []; //reset temp categorys
+      })
+    );
   }
 
   getTasks(): void {
     let tempTasks: Task[] = [];
-    this.taskService.GetTasks().snapshotChanges().subscribe(category => {
-      category.forEach(element => {
-        const y = element.payload.doc.data();
-        y['id'] = element.payload.doc.id;
-        tempTasks.push(y as Task);
-      });
-      this.tasks = tempTasks;
-      tempTasks = []; //reset temp tasks
-    });
+    this.subscriptions.push(
+      this.taskService.GetTasks().snapshotChanges().subscribe(category => {
+        category.forEach(element => {
+          const y = element.payload.doc.data();
+          y['id'] = element.payload.doc.id;
+          tempTasks.push(y as Task);
+        });
+        this.tasks = tempTasks;
+        tempTasks = []; //reset temp tasks
+      })
+    );
   }
 
   onCheck(taskID: string | undefined) {
@@ -202,12 +215,16 @@ export class HomeComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logout();
+    setTimeout(() => {
+      this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    }, 500);
+    
+      this.authService.logout();
     setTimeout(() => {
       if (this.router.url != "/resetpw") {
         this.router.navigateByUrl('/login');
       }
-    }, 2000);
+    }, 1000);
   }
 
   resetPW(): void {

@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/Category';
 import { Task } from 'src/app/models/Task';
 import { CategoryService } from 'src/app/Services/category.service';
@@ -11,7 +12,7 @@ import { TaskService } from 'src/app/Services/task.service';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss']
 })
-export class TaskFormComponent implements OnInit {
+export class TaskFormComponent implements OnInit, OnDestroy {
 
   @Output() closeModal = new EventEmitter<string>();
   @Output() hideForm = new EventEmitter<string>();
@@ -25,6 +26,8 @@ export class TaskFormComponent implements OnInit {
   categorys?: Category[];
   taskForm: FormGroup;
 
+  private subscriptions: Subscription[] = [];
+
   constructor(public af: AngularFireAuth,
               private categoryService: CategoryService,
               private formBuilder: FormBuilder,
@@ -34,15 +37,21 @@ export class TaskFormComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    this.af.authState.subscribe(user => {
-      if (user) {
-        this.categorys = [];
-        this.getCategorys();
-        this.taskForm = this.createUserForm();
-        this.showForm = true;
-        
-      }
-    });
+    this.subscriptions.push(
+      this.af.authState.subscribe(user => {
+        if (user) {
+          this.categorys = [];
+          this.getCategorys();
+          this.taskForm = this.createUserForm();
+          this.showForm = true;
+          
+        }
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   dateValidator(control: AbstractControl): {[key: string]: any} | null  {
@@ -88,15 +97,17 @@ export class TaskFormComponent implements OnInit {
 
   getCategorys(): void {
     let tempCategorys: Category[] = [];
-    this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
-      category.forEach(element => {
-        const y = element.payload.doc.data();
-        y['id'] = element.payload.doc.id;
-        tempCategorys.push(y as Category);
-      });
-      this.categorys = tempCategorys;
-      tempCategorys = []; //reset temp categorys
-    });
+    this.subscriptions.push(
+      this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
+        category.forEach(element => {
+          const y = element.payload.doc.data();
+          y['id'] = element.payload.doc.id;
+          tempCategorys.push(y as Category);
+        });
+        this.categorys = tempCategorys;
+        tempCategorys = []; //reset temp categorys
+      })
+    );
   }
 
   createUserForm() {
@@ -134,7 +145,6 @@ export class TaskFormComponent implements OnInit {
           if (this.taskForm.value.taskID === "") {
             this.taskService.CreateTask(this.taskForm.value)
             this.closeModal.emit('hide');
-            //window.alert('Aufgabe: ' + this.taskForm.value.name + ' erfolreich hinzugefügt!');
             this.resetForm();
           } else {
             this.taskService.UpdateTask(this.taskForm.value);

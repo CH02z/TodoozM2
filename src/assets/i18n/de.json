@@ -4,6 +4,7 @@
         "password": "Passwort",
         "login": "Anmelden",
         "logout": "Abmelden",
+        "loggedout": "abgemeldet",
         "signup": "Registrieren",
         "alrreg": "Bereits registriert? Hier anmelden",
         "noacc": "Noch kein Account? Hier registrieren",
@@ -12,7 +13,10 @@
         "Didntforg": "Passwort doch nicht vergessen? Hier anmelden",
         "reset": "zurücksetzen",
         "LoggedInAs": "Angemeldet als",
-        "chooseLang": "Sprache wählen"
+        "chooseLang": "Sprache wählen",
+        "successful": "erfolgreich",
+        "resetMailSent":  "Mail zum reseten des Passworts wurde verschickt.",
+        "missingMail": "Fehler: eine Email Adresse wird benötigt"
     },
     "todo": {
         "addTask": "Aufgabe hinzufügen",
@@ -28,6 +32,8 @@
         "categorys": "Kategorien",
         "description": "Beschreibung",
         "add": "hinzufügen",
+        "added": "hinzugefügt",
+        "deleted": "gelöscht",
         "addCategory": "Kategorie hinzufügen",
         "back": "zurück",
         "noCategoryYet": "Noch keine Kategorie erstellt",

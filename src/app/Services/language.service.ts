@@ -28,7 +28,6 @@ export class LanguageService {
   selectLang(lang: string) {
     if (this.uid.length !== 0) {
       let userLang = {"defaultLanguage": lang};
-    console.log('db call')
     this.db.collection('users').doc(this.uid).set(userLang);
     }
     if (lang == 'de') {
@@ -40,7 +39,6 @@ export class LanguageService {
   }
 
   setDefaulLang() {
-    console.log('db call')
     this.db.collection('users').doc(this.uid).snapshotChanges().subscribe(
       element => {
         if (element) {

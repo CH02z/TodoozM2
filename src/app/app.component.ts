@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { TranslateService } from '@ngx-translate/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { element } from 'protractor';
 import { LanguageService } from './Services/language.service';
 
 @Component({

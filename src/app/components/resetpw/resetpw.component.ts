@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-resetpw',
@@ -11,7 +12,9 @@ export class ResetpwComponent implements OnInit {
 
   email = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService,
+              private router: Router,
+              private translate: TranslateService) { }
 
   ngOnInit(): void {
   }
@@ -20,10 +23,10 @@ export class ResetpwComponent implements OnInit {
     if (this.email.length !== 0) {
       this.authService.resetPassword(this.email)
     .then(() => {
-      window.alert('Mail zum Reseten des Passworts per mail verschickt!');
+      window.alert(this.translate.instant('auth.resetMailSent') + ".");
       this.router.navigateByUrl('/login');
     })
-    .catch((err) => window.alert('Fehler: Stelle sicher, dass die Emailadresse eingegeben ist.'));
+    .catch((err) => window.alert(this.translate.instant('auth.missingMail') + "."));
     }
   }
 }

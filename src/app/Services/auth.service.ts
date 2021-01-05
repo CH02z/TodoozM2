@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,7 +10,8 @@ export class AuthService {
 
   user: Observable<any>;
 
-  constructor(private af: AngularFireAuth) {
+  constructor(private af: AngularFireAuth,
+              private translate: TranslateService) {
     this.user = af.authState;
   }
 
@@ -50,14 +52,14 @@ export class AuthService {
   logout() {
     this.af.signOut()
     .then(suc => {
-        window.alert('erfolgreich abgemeldet!');
+        window.alert(this.translate.instant('auth.successful') + " " + this.translate.instant('auth.loggedout') + ".");
       });
   }
 
   resetPassword(email: string) {
     return this.af.sendPasswordResetEmail(email)
-      .then(suc => {window.alert('Mail zum reseten des Passworts verschickt'); })
-      .catch(err => {window.alert('Fehler: Stelle sicher, dass die Emailadresse im eingegeben ist.'); });
+      .then(suc => {window.alert(this.translate.instant('auth.resetMailSent') + "."); })
+      .catch(err => {window.alert(this.translate.instant('auth.missingMail') + "."); });
   }
 
   getuser(): any {
