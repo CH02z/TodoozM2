@@ -1,6 +1,6 @@
 <!-- Navbar-------------------------------------------------------------------------------------------->
 <nav class="navbar navbar-light bg-light" style="border-bottom: 1px solid rgb(197, 197, 197);">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/login">
       <img src="../../../assets/img/logo.png" height="50px" alt="">
     </a>
   
@@ -20,9 +20,9 @@
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <li><a class="dropdown-item" (click)="langService.selectLang('en')">English</a></li>
         <li><a class="dropdown-item" (click)="langService.selectLang('de')">Deutsch</a></li>
+        <li><a class="dropdown-item" style="color: grey;" (click)="logout()">{{ 'auth.logout' | translate }}</a></li>
       </ul>
     </div>
-    <!-- <button type="button" class="btn btn-outline-secondary btn-sm" (click)="logout()">{{ 'auth.logout' | translate }}</button> -->
   
   </nav>
   
