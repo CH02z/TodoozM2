@@ -24,6 +24,8 @@
 
   <br>
 
+  <p *ngIf="taskCounter() !== 0" style="font-weight: 200;">{{taskCounter()}} {{ 'todo.openTasks' | translate }}...</p>
+
   <div *ngIf="categorys?.length === 0">
     <p> <b>{{ 'todo.important' | translate }}:</b> {{ 'todo.alertFirstCategory' | translate }}.</p>
     <button type="button" class="btn btn-info btn-sm" routerLink="/categorys">{{ 'todo.categorys' | translate }} {{ 'todo.menu' | translate }}</button>

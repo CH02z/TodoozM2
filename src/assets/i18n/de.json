@@ -41,7 +41,8 @@
         "noCategoryYet": "Noch keine Kategorie erstellt",
         "alertFirstCategory": "Um eine Aufgabe hinzufügen zu können, musst du zuerst eine Kategorie erstellen",
         "important": "Wichtig",
-        "menu": "Menü"
+        "menu": "Menü",
+        "openTasks": "offene Tasks"
     },
     "form": {
         "task": "Aufgabe",

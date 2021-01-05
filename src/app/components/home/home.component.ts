@@ -174,6 +174,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     return containsHighPriority;
   }
 
+  taskCounter(): number {
+    let taskCounter: number = 0;
+    if (this.tasks?.length !== 0 && this.tasks) {
+      this.tasks.forEach(element => {
+        if (!element.isDone) {
+          taskCounter += 1;
+        }
+      });
+    }
+    return taskCounter;
+  }
+
   categoryIsUsed(category: string | undefined): boolean {
     let usedCategorys: string[] = [];
     if (this.tasks?.length !== 0 && this.tasks && this.categorys) {

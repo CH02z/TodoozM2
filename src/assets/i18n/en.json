@@ -41,7 +41,8 @@
         "noCategoryYet": "No category added yet",
         "alertFirstCategory": "In order to add a task, you have to create a Category first",
         "important": "important",
-        "menu": "menu"
+        "menu": "menu",
+        "openTasks": "open tasks"
     },
     "form": {
         "task": "Task",
