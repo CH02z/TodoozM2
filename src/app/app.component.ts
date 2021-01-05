@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 
 export class AppComponent {
 
-  title = 'todooz2';
+  title = 'Todooz';
   uid = '';
   private subscriptions: Subscription[] = [];
 
