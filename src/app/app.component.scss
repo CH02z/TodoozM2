@@ -2,3 +2,19 @@
 a, li {
     cursor: pointer;
 }
+
+.footer {
+    padding-right: 1em;
+    background-color: #ffffff;
+    border-top: 1px solid rgb(209, 209, 209);
+    &-copyright {
+      font-size: 9pt;
+      position: unset;
+      float: right;
+  
+    }
+  }
+  
+  a {
+    color: black;
+  }

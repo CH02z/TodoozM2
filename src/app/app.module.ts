@@ -22,6 +22,7 @@ import { SearchPipe } from './search.pipe';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ImpressumComponent } from './components/impressum/impressum.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -39,7 +40,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CategorysComponent,
     CategorysFormComponent,
     TaskFormComponent,
-    SearchPipe
+    SearchPipe,
+    ImpressumComponent
   ],
   imports: [
     BrowserModule,

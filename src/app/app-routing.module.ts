@@ -6,12 +6,14 @@ import { HomeComponent } from './components/home/home.component';
 import { ResetpwComponent } from './components/resetpw/resetpw.component';
 import { AuthGuard } from './auth.guard';
 import { CategorysComponent } from './components/categorys/categorys.component';
+import { ImpressumComponent } from './components/impressum/impressum.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'resetpw', component: ResetpwComponent},
+  {path: 'impressum', component: ImpressumComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'categorys', component: CategorysComponent, canActivate: [AuthGuard]},
 
