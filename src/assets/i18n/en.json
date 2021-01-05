@@ -16,7 +16,9 @@
         "chooseLang": "choose language",
         "successful": "successfully",
         "resetMailSent":  "Mail to reset Password sent",
-        "missingMail": "Error: no email adress given"
+        "missingMail": "Error: no email adress given",
+        "google": "Continue with Google",
+        "continue": "continue"
     },
     "todo": {
         "addTask": "Add Task",

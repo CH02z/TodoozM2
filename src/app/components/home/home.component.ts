@@ -227,7 +227,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  resetPW(): void {
+  async resetPW() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
     this.router.navigateByUrl('resetpw')
     this.logout();
   }

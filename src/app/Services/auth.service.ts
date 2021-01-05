@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import firebase from 'firebase/app';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,8 @@ export class AuthService {
   user: Observable<any>;
 
   constructor(private af: AngularFireAuth,
-              private translate: TranslateService) {
+              private translate: TranslateService,
+              private router: Router) {
     this.user = af.authState;
   }
 
@@ -49,6 +52,19 @@ export class AuthService {
     });
   }
 
+  loginWithGoogle(){
+    this.af.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(
+      error => {
+        console.log(error);
+      }
+      
+    ).then(
+      suc => {
+        this.router.navigateByUrl('/home');
+      }
+    )
+}
+
   logout() {
     this.af.signOut()
     .then(suc => {
@@ -56,7 +72,7 @@ export class AuthService {
       });
   }
 
-  resetPassword(email: string) {
+  async resetPassword(email: string) {
     return this.af.sendPasswordResetEmail(email)
       .then(suc => {window.alert(this.translate.instant('auth.resetMailSent') + "."); })
       .catch(err => {window.alert(this.translate.instant('auth.missingMail') + "."); });

@@ -17,9 +17,14 @@ export class AuthGuard implements CanActivate {
     this.af.authState.subscribe(user => {
       if (!user) {
         console.log('access to home denied.')
-        this.router.navigate(['/login']);
+        if (this.router.url != "/resetpw") {
+          this.router.navigate(['/login']);
+        }
         this.isAuthenticated = false;
       } else {
+        if (this.router.url != "/home" && this.router.url != "/login") {
+          this.router.navigate(['/login']);
+        }
         this.isAuthenticated = true;
       }
     });

@@ -41,4 +41,9 @@ export class LoginComponent implements OnInit {
       this.checkIfLoggedIn();
     }
   }
+
+  loginWithGoogle(): void {
+    this.authService.loginWithGoogle();
+    this.checkIfLoggedIn();
+  }
 }
