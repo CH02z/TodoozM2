@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "todoozm2"
+  },
+  "targets": {
+    "todoozm2": {
+      "hosting": {
+        "todooz2": [
+          "todoozm2"
+        ]
+      }
+    }
+  }
+}
