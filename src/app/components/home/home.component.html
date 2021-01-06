@@ -133,7 +133,7 @@
 
   <br>
    <!-- overdue Tasks -->
-   <div *ngIf="containsHighPriority()">
+   <div *ngIf="containsOverdueTask()">
     <h4>{{ 'todo.taskOverdue' | translate }}</h4>
     <div class="card" *ngFor="let task of tasks | search:searchTerm" [ngClass]="{'hidden': task.highPriority || task.isDone || !taskIsOverdue(task.endDate)} || task.highPriority">
      <input type="checkbox" (change)="onCheck(task.id)" id="checkbox" class="checkBoxTasks" style="margin-right: 10px; margin-top: 9px;">
