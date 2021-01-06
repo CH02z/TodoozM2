@@ -128,8 +128,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       stringDay = stringDay + day;
     }
     const year = dateObj.getUTCFullYear();
-    const newdate = year + "-" + stringMonth + "-" + stringDay;
-    return newdate == endDate ? true : false;
+    const today = year + "-" + stringMonth + "-" + stringDay;
+    return today == endDate ? true : false;
   }
 
   containsEndingToday(): boolean {
@@ -153,8 +153,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           stringDay = stringDay + day;
         }
         const year = dateObj.getUTCFullYear();
-        const newdate = year + "-" + stringMonth + "-" + stringDay;
-        if (element.endDate == newdate && !element.isDone) {
+        const today = year + "-" + stringMonth + "-" + stringDay;
+        if (element.endDate == today && !element.isDone) {
           containsEndingToday = true;
         }
       });
@@ -172,6 +172,63 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
     }
     return containsHighPriority;
+  }
+
+  taskIsOverdue(endDate: string | undefined): boolean {
+    let stringMonth = "";
+    let stringDay = "";
+    const dateObj = new Date();
+    const month = dateObj.getUTCMonth() + 1; //months from 1-12
+    if (month.toString().length == 1) {
+      stringMonth = "0" + month.toString();
+    } else {
+      stringMonth = stringMonth + month;
+    }
+    const day = dateObj.getUTCDate();
+    if (day.toString().length == 1) {
+      stringDay = "0" + day.toString();
+    } else {
+      stringDay = stringDay + day;
+    }
+    const year = dateObj.getUTCFullYear();
+    const today = year + "-" + stringMonth + "-" + stringDay;
+    if (endDate) {
+      return today > endDate ? true : false;
+    } else {
+      return false;
+    }
+    
+  }
+
+  containsOverdueTask(): boolean {
+    let containsOverdueTask = false;
+    if (this.tasks?.length !== 0 && this.tasks) {
+      this.tasks.forEach(element => {
+        let stringMonth = "";
+        let stringDay = "";
+        const dateObj = new Date();
+        const month = dateObj.getUTCMonth() + 1; //months from 1-12
+        if (month.toString().length == 1) {
+          stringMonth = "0" + month.toString();
+        } else {
+          stringMonth = stringMonth + month;
+        }
+        const day = dateObj.getUTCDate();
+        if (day.toString().length == 1) {
+          stringDay = "0" + day.toString();
+        } else {
+          stringDay = stringDay + day;
+        }
+        const year = dateObj.getUTCFullYear();
+        const today = year + "-" + stringMonth + "-" + stringDay;
+        if (element.endDate) {
+          if (today > element.endDate && !element.isDone) {
+            containsOverdueTask = true;
+          }
+        }
+      });
+    }
+    return containsOverdueTask;
   }
 
   taskCounter(): number {

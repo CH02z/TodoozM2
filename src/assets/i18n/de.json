@@ -42,7 +42,9 @@
         "alertFirstCategory": "Um eine Aufgabe hinzufügen zu können, musst du zuerst eine Kategorie erstellen",
         "important": "Wichtig",
         "menu": "Menü",
-        "openTasks": "offene Tasks"
+        "openTasks": "offene Tasks",
+        "oneDayLeft": "In einem Tag fällig",
+        "taskOverdue": "Aufgabe überfällig"
     },
     "form": {
         "task": "Aufgabe",

@@ -42,7 +42,9 @@
         "alertFirstCategory": "In order to add a task, you have to create a Category first",
         "important": "important",
         "menu": "menu",
-        "openTasks": "open tasks"
+        "openTasks": "open tasks",
+        "oneDayLeft": "Due in one day",
+        "taskOverdue": "Task overdue"
     },
     "form": {
         "task": "Task",
