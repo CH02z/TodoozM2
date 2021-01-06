@@ -106,7 +106,7 @@
 
    <!-- critical tsasks (one day befor enddate) -->
    <div *ngIf="containsEndingToday()">
-    <h4>{{ 'todo.oneDayLeft' | translate}}</h4>
+    <h4>{{ 'todo.oneDayLeft' | translate }}</h4>
     <div class="card" *ngFor="let task of tasks | search:searchTerm" [ngClass]="{'hidden': !taskEndsToday(task.endDate) || task.isDone}" style="background-color: #c62b2b; color: white">
      <input type="checkbox" (change)="onCheck(task.id)" id="checkbox" class="checkBoxTasks" style="margin-right: 10px; margin-top: 9px;">
      <div class="card-body" (click)="openModal(taskDetail)" (click)="openTaskDetail(task)" class="taskbody" style="width: 90%;">
