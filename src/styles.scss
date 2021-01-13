@@ -1,6 +1,10 @@
-html, body { height: 100%; }
+html, body { 
+  height: 100%;
+  overflow-x: hidden;
+}
 
 body {
   background-color: #F5F7FA;
   color: #3B474F;
+  position: relative;
 }

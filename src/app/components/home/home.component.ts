@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   searchTerm?: string;
   formTask?: Task;
   selectedCategory?: string;
+  chevDirection: boolean = true; //direction of chevron icon from done tasks button
 
   private subscriptions: Subscription[] = [];
 
@@ -166,7 +167,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     let containsHighPriority = false;
     if (this.tasks?.length !== 0 && this.tasks) {
       this.tasks.forEach(element => {
-        if (element.highPriority && !element.isDone) {
+        if (element.highPriority &&
+            !element.isDone &&
+            !this.taskIsOverdue(element.endDate) &&
+            !this.taskEndsToday(element.endDate)) {
           containsHighPriority = true;
         }
       });
