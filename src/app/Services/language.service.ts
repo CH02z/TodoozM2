@@ -25,17 +25,23 @@ export class LanguageService {
   }
 
 
-  selectLang(lang: string) {
+  selectLang(lang: any) {
+    let langShort = ""
+    this.selectedLang = lang.target.value.toString();
+    if (lang.target.value.toString() == "Deutsch") {
+      langShort = "de"
+    } else if (lang.target.value.toString() == "English") {
+      langShort = "en"
+    }
     if (this.uid.length !== 0) {
-      let userLang = {"defaultLanguage": lang};
-    this.db.collection('users').doc(this.uid).set(userLang);
+      let userLang = {"defaultLanguage": langShort};
+      console.log("dbcall")
+      this.db.collection('users').doc(this.uid).update(userLang);
     }
-    if (lang == 'de') {
-      this.selectedLang = 'Deutsch';
-    } else {
-      this.selectedLang = 'English';
+    if (langShort != "") {
+      this.translate.use(langShort);
     }
-    this.translate.use(lang);
+    
   }
 
   setDefaulLang() {
@@ -54,8 +60,7 @@ export class LanguageService {
           
         } else {
           this.translate.use('en');
-          let userLang = {"defaultLanguage": 'en'};
-          this.selectLang('en')
+          this.selectLang('English')
         }
       }
     )

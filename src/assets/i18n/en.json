@@ -61,7 +61,8 @@
         "edit": "edit",
         "reset": "reset",
         "name": "name",
-        "description": "description"
+        "description": "description",
+        "apply": "apply"
 
     }
 }

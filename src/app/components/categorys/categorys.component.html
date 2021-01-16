@@ -25,7 +25,7 @@
 
 
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let category of categorys;">
+    <li class="list-group-item" style="background-color: var(--bg-card);" *ngFor="let category of categorys;">
       {{ category.name }}
       <img *ngIf="!categoryIsUsed(category.name)" src="../../../assets/img/trash.png" alt="delete" (click)="onDelete(category.id)">
       

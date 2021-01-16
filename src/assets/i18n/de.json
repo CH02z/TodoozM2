@@ -28,7 +28,7 @@
         "highPrio": "Hohe Priorität",
         "critical": "Kritisch",
         "finishedTasks": "Erledigte Aufgaben",
-        "created": "erstellt",
+        "created": "Erstellt",
         "enddate": "Zieldatum",
         "category": "Kategorie",
         "categorys": "Kategorien",
@@ -61,7 +61,8 @@
         "edit": "bearbeiten",
         "reset": "zurücksetzen",
         "name": "Name",
-        "description": "Beschreibung"
+        "description": "Beschreibung",
+        "apply": "übernehmen"
 
     }
 }

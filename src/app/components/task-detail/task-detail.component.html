@@ -1,3 +1,5 @@
 <p><b>{{ 'todo.created' | translate }}:</b> {{task?.dateDefined | date:'medium'}}</p>
+<p><b>{{ 'todo.enddate' | translate }}:</b> {{task?.endDate | date}}</p>
+<p><b>{{ 'todo.category' | translate }}:</b> {{task?.category}}</p>
 <p *ngIf="task?.isDone"><b>Beendet:</b>  {{task?.dateFinished}}</p>
 <p><b>{{ 'todo.description' | translate }}:</b> {{task?.description}}</p>

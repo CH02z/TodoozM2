@@ -2,16 +2,30 @@
     margin-top: 10px;
     margin-bottom: 10px;
     cursor: pointer;
-    color: #626262;
+    color: var(--color-text);
+    background-color: var(--bg-card);
   }
 
 
 .card-title {
-  color: #626262;
+  color: var(--color-text);
+}
+
+.modal-body {
+  background-color: var(--bg-app);
+}
+
+.modal-header {
+  background-color: var(--bg-card);
 }
 
 .input-group-text {
   background-color: white;
+}
+
+input[type=text] {
+  background-color: var(--bg-card);
+  color: var(--color-text);
 }
   
   .card:hover  {
@@ -71,7 +85,7 @@
 }
 
 h4 {
-  color: #626262;
+  color: var(--color-text);
   cursor: pointer;
   &:hover {
     text-decoration: underline;
