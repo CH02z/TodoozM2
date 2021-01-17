@@ -145,8 +145,8 @@
     <div class="card" *ngFor="let task of tasks | search:searchTerm" [ngClass]="{'hidden': task.isDone || !taskIsOverdue(task.endDate)} || task.highPriority">
      <input type="checkbox" (change)="onCheck(task.id)" id="checkbox" class="checkBoxTasks" style="margin-right: 10px; margin-top: 9px;">
      <div class="card-body" (click)="openModal(taskDetail)" (click)="openTaskDetail(task)" class="taskbody" style="width: 90%;">
-       <h5 class="card-title" style="font-size: 16px; color: var(--bg-due)">{{task.name}}</h5>
-        <h6 class="card-text text-muted" style="font-size: 12px">{{ 'todo.created' | translate }}: {{task.dateDefined | date}} · {{ 'todo.enddate' | translate }}: {{task.endDate | date}} · {{task.category}}</h6>
+       <h5 class="card-title" style="font-size: 16px; color: #c62b2b">{{task.name}}</h5>
+        <h6 class="card-text text-muted" style="font-size: 12px">{{ 'todo.created' | translate }}: {{task.dateDefined | date}} · {{ 'todo.enddate' | translate }}: {{task.endDate | date}}</h6>
        </div>
    </div>
   </div>
