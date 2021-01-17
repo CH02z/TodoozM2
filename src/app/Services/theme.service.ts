@@ -52,7 +52,6 @@ export class ThemeService {
     this.setActiveTheme(dark);
     this.darkmode = true;
     let userTheme = {"defaultTheme": "dark"};
-    console.log("dbcall set dark theme")
     this.db.collection('users').doc(this.uid).update(userTheme)
   }
 
@@ -60,7 +59,6 @@ export class ThemeService {
     this.setActiveTheme(light);
     this.darkmode = false;
     let userTheme = {"defaultTheme": "light"};
-    console.log("dbcall set light theme")
     this.db.collection('users').doc(this.uid).update(userTheme), {merge: true};
   }
 

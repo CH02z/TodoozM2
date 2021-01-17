@@ -35,7 +35,6 @@ export class LanguageService {
     }
     if (this.uid.length !== 0) {
       let userLang = {"defaultLanguage": langShort};
-      console.log("dbcall")
       this.db.collection('users').doc(this.uid).update(userLang);
     }
     if (langShort != "") {

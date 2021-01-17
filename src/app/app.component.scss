@@ -23,3 +23,8 @@ a, li {
   .bg-light {
     background-color: var(--bg-card)!important;
 }
+
+svg:focus {
+    outline: none;
+    box-shadow: none;
+}

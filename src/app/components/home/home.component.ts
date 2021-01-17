@@ -197,7 +197,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const year = dateObj.getUTCFullYear();
     const today = year + "-" + stringMonth + "-" + stringDay;
     if (endDate) {
-      return today > endDate ? true : false;
+      return today >= endDate ? true : false;
     } else {
       return false;
     }
@@ -226,7 +226,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         const year = dateObj.getUTCFullYear();
         const today = year + "-" + stringMonth + "-" + stringDay;
         if (element.endDate) {
-          if (today > element.endDate && !element.isDone) {
+          if (today >= element.endDate && !element.isDone) {
             containsOverdueTask = true;
           }
         }

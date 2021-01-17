@@ -97,11 +97,16 @@ export class CategorysComponent implements OnInit, OnDestroy {
     return returnbool;
   }
 
-  onDelete(categoryID: string | undefined): void {
-    if (categoryID !== undefined) {
-      this.categoryService.DeleteCategory(categoryID);
-      window.alert(this.translate.instant('todo.category') + " " + this.translate.instant('todo.deleted') + ".");
+  onDelete(category: Category | undefined): void {
+    if (this.categoryIsUsed(category?.name)) {
+      window.alert(this.translate.instant('todo.CatCannotBeDeleted') + ".");
+    } else {
+      if (category?.id !== undefined) {
+        this.categoryService.DeleteCategory(category.id);
+        window.alert(this.translate.instant('todo.category') + " " + this.translate.instant('todo.deleted') + ".");
+      }
     }
+    
   }
 
   openModal(template: TemplateRef<any>) {

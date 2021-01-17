@@ -11,9 +11,9 @@
         <br>
         <div class="card">
           <article class="card-body">
-            <h4 class="card-title text-center mb-4 mt-1" style="color: #3B474F;">{{ 'auth.login' | translate }}
+            <h4 class="card-title text-center mb-4 mt-1" style="color: var(--color-text);">{{ 'auth.login' | translate }}
             </h4>
-            <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/signup" routerLinkActive="active">{{ 'auth.noacc' | translate }}...</a></p>
+            <p class="text-success text-center"><a style="color: var(--color-text);" routerLink="/signup" routerLinkActive="active">{{ 'auth.noacc' | translate }}...</a></p>
             <hr>
             <form #formData="ngForm" (submit)="onSubmit(formData)">
               <!-- email input---------------->
@@ -59,7 +59,7 @@
                 <button class="btn btn-info btn-block" routerLink="/home">{{ 'auth.continue' | translate }}</button>
               </div>  
 
-              <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/resetpw" routerLinkActive="active">{{ 'auth.forgPasswd' | translate }}...</a></p>
+              <p class="text-success text-center"><a style="color: var(--color-text);" routerLink="/resetpw" routerLinkActive="active">{{ 'auth.forgPasswd' | translate }}...</a></p>
             </form>
 
             <hr>

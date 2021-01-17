@@ -11,8 +11,8 @@
         <br>
         <div class="card">
           <article class="card-body">
-            <h4 class="card-title text-center mb-4 mt-1" style="color: #3B474F;">{{ 'auth.signup' | translate }}</h4>
-            <p class="text-success text-center"><a style="color: rgb(82, 82, 82)" routerLink="/login" routerLinkActive="active">{{ 'auth.alrreg' | translate }}...</a></p>
+            <h4 class="card-title text-center mb-4 mt-1" style="color: var(--color-text);">{{ 'auth.signup' | translate }}</h4>
+            <p class="text-success text-center"><a style="color: var(--color-text);" routerLink="/login" routerLinkActive="active">{{ 'auth.alrreg' | translate }}...</a></p>
             <hr>
             <form #formData="ngForm" (submit)="onSubmit(formData)">
               <!-- email input---------------->
