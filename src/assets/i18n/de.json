@@ -28,7 +28,7 @@
         "highPrio": "Hohe Priorität",
         "critical": "Kritisch",
         "finishedTasks": "Erledigte Aufgaben",
-        "created": "erstellt",
+        "created": "Erstellt",
         "enddate": "Zieldatum",
         "category": "Kategorie",
         "categorys": "Kategorien",
@@ -44,7 +44,8 @@
         "menu": "Menü",
         "openTasks": "offene Tasks",
         "oneDayLeft": "In einem Tag fällig",
-        "taskOverdue": "Aufgabe überfällig"
+        "taskOverdue": "Aufgabe überfällig",
+        "CatCannotBeDeleted": "Kategorie kann erst gelöscht werden, wenn alle darin enthaltenen Tasks abgeschlossen sind"
     },
     "form": {
         "task": "Aufgabe",
@@ -61,7 +62,8 @@
         "edit": "bearbeiten",
         "reset": "zurücksetzen",
         "name": "Name",
-        "description": "Beschreibung"
+        "description": "Beschreibung",
+        "apply": "übernehmen"
 
     }
 }

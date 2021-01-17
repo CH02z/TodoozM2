@@ -23,6 +23,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ImpressumComponent } from './components/impressum/impressum.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -41,7 +42,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CategorysFormComponent,
     TaskFormComponent,
     SearchPipe,
-    ImpressumComponent
+    ImpressumComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

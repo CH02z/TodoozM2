@@ -5,8 +5,9 @@ a, li {
 
 .footer {
     padding-right: 1em;
-    background-color: #ffffff;
-    border-top: 1px solid rgb(209, 209, 209);
+    background-color: var(--bg-card);
+    color: var(--color-text);
+    border-top: 1px solid var(--color-line);
     &-copyright {
       font-size: 9pt;
       position: unset;
@@ -16,9 +17,14 @@ a, li {
   }
   
   a {
-    color: black;
+    color: var(--color-text);
   }
 
   .bg-light {
-    background-color: #ffffff!important;
+    background-color: var(--bg-card)!important;
+}
+
+svg:focus {
+    outline: none;
+    box-shadow: none;
 }

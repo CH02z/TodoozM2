@@ -1,10 +1,22 @@
+:root {
+  /* Colors */
+  --bg-app: #F5F7FA;
+  --bg-card: #ffffff;
+  --bg-due: #c62b2b;
+  --bg-highprio: #ffc44f;
+  --color-text: #626262;
+  --color-line: #d1d1d1;
+  --color-textsecondary: #cecece;
+}
+
+
 html, body { 
   height: 100%;
   overflow-x: hidden;
 }
 
 body {
-  background-color: #F5F7FA;
-  color: #3B474F;
+  background-color: var(--bg-app);
+  color: var(--color-text);
   position: relative;
 }

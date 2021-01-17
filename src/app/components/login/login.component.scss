@@ -2,11 +2,17 @@
   cursor: pointer;
 }
 
+hr {
+  background-color: var(--color-line);
+}
+
 .card  {
   -webkit-box-shadow: 0px 12px 27px -6px rgba(0,0,0,0.25);
   -moz-box-shadow: 0px 12px 27px -6px rgba(0,0,0,0.25);
   box-shadow: 0px 12px 27px -6px rgba(83, 40, 40, 0.25);
   margin-left: 5px;
+  color: var(--color-text);
+  background-color: var(--bg-card);
 }
 
 .vertical-center {
@@ -25,8 +31,25 @@
  background-size: cover;
  margin: 0;
  padding: 0;
+ background-color: var(--bg-app);
 }
 
 .btn-light {
   outline: red !important;
 }
+
+input, textarea, select {
+  background-color: var(--bg-card);
+  color: var(--color-text);
+  border-color: var(--color-line);
+}
+
+input:focus{
+  background-color: var(--bg-card);
+  color: var(--color-text);
+  border-color: var(--color-line);
+}
+
+/* .input-group-text {
+  background-color: var(--bg-card);
+} */

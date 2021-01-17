@@ -1,0 +1,16 @@
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(3); /* IE */
+  -moz-transform: scale(3); /* FF */
+  -webkit-transform: scale(3); /* Safari and Chrome */
+  -o-transform: scale(3); /* Opera */
+  transform: scale(3);
+  
+}
+
+input, textarea, select {
+  background-color: var(--bg-card);
+  color: var(--color-text);
+  border-color: var(--color-line);
+}

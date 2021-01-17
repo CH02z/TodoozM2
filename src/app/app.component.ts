@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { LanguageService } from './Services/language.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { ThemeService } from './Services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +22,14 @@ export class AppComponent {
   constructor(public authService: AuthService,
               public af: AngularFireAuth,
               public langService: LanguageService,
+              public themeService: ThemeService,
               private router: Router) {  
     this.subscriptions.push(
       this.af.authState.subscribe(user => {
         if (user) {
           this.uid = user.uid;
           this.langService.setDefaulLang();
+          this.themeService.setDefaultTheme();
         }
       })
     );

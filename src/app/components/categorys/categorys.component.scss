@@ -18,3 +18,11 @@ img {
   margin: auto;
   max-width: 600px;
 }
+
+.modal-body {
+  background-color: var(--bg-app);
+}
+
+.modal-header {
+  background-color: var(--bg-card);
+}

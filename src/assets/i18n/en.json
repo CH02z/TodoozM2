@@ -44,7 +44,8 @@
         "menu": "menu",
         "openTasks": "open tasks",
         "oneDayLeft": "Due in one day",
-        "taskOverdue": "Task overdue"
+        "taskOverdue": "Task overdue",
+        "CatCannotBeDeleted": "A category containing unfinished tasks cannot be deleted"
     },
     "form": {
         "task": "Task",
@@ -61,7 +62,8 @@
         "edit": "edit",
         "reset": "reset",
         "name": "name",
-        "description": "description"
+        "description": "description",
+        "apply": "apply"
 
     }
 }

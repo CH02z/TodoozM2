@@ -1,0 +1,43 @@
+<br>
+<br>
+
+<div class="container" *ngIf="authService.user | async">
+
+    <form>
+        <div class="form-group row">
+            <label for="inputEmail" class="col-sm-2 col-form-label">Sprache: </label>
+            <div class="col-sm-7 offset-sm-1">
+                <select (change)="langService.selectLang($event)" class="custom-select" style="width: 250px;">
+                    <option *ngIf="langService.selectedLang.length !== 0" selected>{{langService.selectedLang}}</option>
+                    <option *ngIf="langService.selectedLang != 'Deutsch'">Deutsch</option>
+                    <option *ngIf="langService.selectedLang != 'English'">English</option>
+                  </select>
+            </div>
+            
+
+        </div>
+
+
+       
+
+        <div class="form-group row">
+            <label for="inputEmail" class="col-sm-2 col-form-label">Darkmode: </label>
+            <div class="col-sm-7 offset-sm-1">
+                <div class="custom-control custom-switch" style="position: relative; top: 8px;" >
+                    <input type="checkbox" [checked]="themeService.darkmode" (change)="toggleTheme()" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label" for="customSwitch1"></label>
+                  </div>
+            </div>
+        </div>
+
+        
+
+
+
+    </form>
+
+    <br>
+    <br>
+
+    <button type="button" class="btn btn-secondary btn-sm" routerLink="/home" style="margin-right: 10px;">{{ 'todo.back' | translate }}</button>
+</div>

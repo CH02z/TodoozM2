@@ -7,6 +7,7 @@ import { ResetpwComponent } from './components/resetpw/resetpw.component';
 import { AuthGuard } from './auth.guard';
 import { CategorysComponent } from './components/categorys/categorys.component';
 import { ImpressumComponent } from './components/impressum/impressum.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'impressum', component: ImpressumComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'categorys', component: CategorysComponent, canActivate: [AuthGuard]},
+  {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]}
 
 ];
 
