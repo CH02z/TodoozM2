@@ -33,7 +33,7 @@
 
   <div class="form-group">
     <label for="exampleFormControlSelect1">{{ 'form.category' | translate }}:</label>
-    <select class="form-control" [ngClass]="{'is-invalid': categoryv?.invalid && (categoryv?.dirty || categoryv?.touched)}" id="exampleFormControlSelect1" formControlName="category">
+    <select class="custom-select" [ngClass]="{'is-invalid': categoryv?.invalid && (categoryv?.dirty || categoryv?.touched)}" id="exampleFormControlSelect1" formControlName="category">
       <option *ngFor="let category of categorys" [value]="category.name">{{category.name}}</option>
     </select>
     <div *ngIf="categoryv?.invalid && (categoryv?.dirty || categoryv?.touched)"
