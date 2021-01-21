@@ -12,24 +12,22 @@ import { TaskService } from 'src/app/Services/task.service';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss']
 })
-export class TaskFormComponent implements OnInit, OnDestroy {
+export class TaskFormComponent implements OnInit {
 
   @Output() closeModal = new EventEmitter<string>();
   @Output() hideForm = new EventEmitter<string>();
   @Input() editTask?: Task;
-  @Input() category?: string;
+  @Input() selectedCat?: string;
+  @Input() categorys?: Category[];
 
 
   showForm: boolean = false;
 
-
-  categorys?: Category[];
   taskForm: FormGroup;
 
   private subscriptions: Subscription[] = [];
 
   constructor(public af: AngularFireAuth,
-              private categoryService: CategoryService,
               private formBuilder: FormBuilder,
               private taskService: TaskService) {
                 this.taskForm = this.formBuilder.group({});
@@ -40,18 +38,12 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.af.authState.subscribe(user => {
         if (user) {
-          this.categorys = [];
-          this.getCategorys();
           this.taskForm = this.createUserForm();
           this.showForm = true;
           
         }
       })
     );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   dateValidator(control: AbstractControl): {[key: string]: any} | null  {
@@ -90,25 +82,10 @@ export class TaskFormComponent implements OnInit, OnDestroy {
 }
 
 
-
+  //form Getters used in template for validationn
   get name() { return this.taskForm.get('name'); }
   get endDate() { return this.taskForm.get('endDate'); }
   get categoryv() { return this.taskForm.get('category'); }
-
-  getCategorys(): void {
-    let tempCategorys: Category[] = [];
-    this.subscriptions.push(
-      this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
-        category.forEach(element => {
-          const y = element.payload.doc.data();
-          y['id'] = element.payload.doc.id;
-          tempCategorys.push(y as Category);
-        });
-        this.categorys = tempCategorys;
-        tempCategorys = []; //reset temp categorys
-      })
-    );
-  }
 
   createUserForm() {
     if (this.editTask === undefined) {
@@ -120,9 +97,9 @@ export class TaskFormComponent implements OnInit, OnDestroy {
         highPriority: [''],
         description: ['']
       });
-      if (this.category !== '') {
-        this.taskForm.get('category')?.setValue(this.category);
-        this.category = '';
+      if (this.selectedCat !== '') {
+        this.taskForm.get('category')?.setValue(this.selectedCat);
+        this.selectedCat = '';
       }
       
 

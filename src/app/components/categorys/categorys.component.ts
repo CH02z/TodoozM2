@@ -6,7 +6,6 @@ import { CategoryService } from 'src/app/Services/category.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TaskService } from 'src/app/Services/task.service';
 import { Task } from 'src/app/models/Task';
-import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -14,12 +13,11 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './categorys.component.html',
   styleUrls: ['./categorys.component.scss']
 })
-export class CategorysComponent implements OnInit, OnDestroy {
+export class CategorysComponent implements OnInit {
 
   categorys?: Category[];
   tasks?: Task[];
   modalRef?: BsModalRef;
-  private subscriptions: Subscription[] = [];
 
   constructor(public authService: AuthService,
               public af: AngularFireAuth,
@@ -27,54 +25,46 @@ export class CategorysComponent implements OnInit, OnDestroy {
               private taskService: TaskService,
               private modalService: BsModalService,
               private translate: TranslateService) {
-                this.subscriptions.push(
-                  this.af.authState.subscribe(user => {
-                    if (user) {
-                      this.categorys = [];
-                      this.tasks = [];
-                      this.getCategorys();
-                      this.getTasks();
-              
-                    }
-                  })
-                ) 
+                
               }
 
   ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.af.authState.subscribe(user => {
+      if (user) {
+        this.categorys = [];
+        this.tasks = [];
+        this.getCategorys();
+        this.getTasks();
+      }
+    })
   }
 
   getCategorys(): void {
     let tempCategorys: Category[] = [];
-    this.subscriptions.push(
-      this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
-        category.forEach(element => {
-          const y = element.payload.doc.data();
-          y['id'] = element.payload.doc.id;
-          tempCategorys.push(y as Category);
-        });
-        this.categorys = tempCategorys;
-        tempCategorys = []; //reset temp categorys
-      })
-    );
+    this.categoryService.GetCategorys().snapshotChanges().
+    subscribe(category => {
+      category.forEach(element => {
+        const y = element.payload.doc.data();
+        y['id'] = element.payload.doc.id;
+        tempCategorys.push(y as Category);
+      });
+      this.categorys = tempCategorys;
+      tempCategorys = []; //reset temp categorys
+    })
   }
 
   getTasks(): void {
     let tempTasks: Task[] = [];
-    this.subscriptions.push(
-      this.taskService.GetTasks().snapshotChanges().subscribe(category => {
-        category.forEach(element => {
-          const y = element.payload.doc.data();
-          y['id'] = element.payload.doc.id;
-          tempTasks.push(y as Task);
-        });
-        this.tasks = tempTasks;
-        tempTasks = []; //reset temp tasks
-      })
-    );
+    this.taskService.GetTasks().snapshotChanges().
+    subscribe(category => {
+      category.forEach(element => {
+        const y = element.payload.doc.data();
+        y['id'] = element.payload.doc.id;
+        tempTasks.push(y as Task);
+      });
+      this.tasks = tempTasks;
+      tempTasks = []; //reset temp tasks
+    })
   }
 
   categoryIsUsed(category: string | undefined): boolean {

@@ -7,14 +7,14 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Category } from 'src/app/models/Category';
 import { Task } from 'src/app/models/Task';
 import { TaskService } from 'src/app/Services/task.service';
-import { Subscription } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   email: string | null = '';
   categorys?: Category[];
@@ -27,8 +27,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   selectedCategory?: string;
   chevDirection: boolean = true; //direction of chevron icon from done tasks button
 
-  private subscriptions: Subscription[] = [];
-
 
   constructor(public authService: AuthService,
               public af: AngularFireAuth,
@@ -36,54 +34,46 @@ export class HomeComponent implements OnInit, OnDestroy {
               private taskService: TaskService,
               private modalService: BsModalService,
               private router: Router) {
-    this.subscriptions.push(
-      this.af.authState.subscribe(user => {
-        if (user) {
-          this.email = user.email;
-          this.categorys = [];
-          this.tasks = [];
-          this.getCategorys();
-          this.getTasks();
-        }
-      })
-    );
   }
 
   ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.af.authState.subscribe(user => {
+      if (user) {
+        this.email = user.email;
+        this.categorys = [];
+        this.tasks = [];
+        this.getCategorys();
+        this.getTasks();
+      }
+    })
   }
 
   getCategorys(): void {
     let tempCategorys: Category[] = [];
-    this.subscriptions.push(
-      this.categoryService.GetCategorys().snapshotChanges().subscribe(category => {
-        category.forEach(element => {
-          const y = element.payload.doc.data();
-          y['id'] = element.payload.doc.id;
-          tempCategorys.push(y as Category);
-        });
-        this.categorys = tempCategorys;
-        tempCategorys = []; //reset temp categorys
-      })
-    );
+    this.categoryService.GetCategorys().snapshotChanges().
+    subscribe(category => {
+      category.forEach(element => {
+        const y = element.payload.doc.data();
+        y['id'] = element.payload.doc.id;
+        tempCategorys.push(y as Category);
+      });
+      this.categorys = tempCategorys;
+      tempCategorys = []; //reset temp categorys
+    })
   }
 
   getTasks(): void {
     let tempTasks: Task[] = [];
-    this.subscriptions.push(
-      this.taskService.GetTasks().snapshotChanges().subscribe(category => {
-        category.forEach(element => {
-          const y = element.payload.doc.data();
-          y['id'] = element.payload.doc.id;
-          tempTasks.push(y as Task);
-        });
-        this.tasks = tempTasks;
-        tempTasks = []; //reset temp tasks
-      })
-    );
+    this.taskService.GetTasks().snapshotChanges().
+    subscribe(category => {
+      category.forEach(element => {
+        const y = element.payload.doc.data();
+        y['id'] = element.payload.doc.id;
+        tempTasks.push(y as Task);
+      });
+      this.tasks = tempTasks;
+      tempTasks = []; //reset temp tasks
+    })
   }
 
   onCheck(taskID: string | undefined) {
@@ -289,7 +279,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   logout(): void {
     setTimeout(() => {
-      this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }, 500);
     
       this.authService.logout();
@@ -301,7 +290,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   async resetPW() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
     this.router.navigateByUrl('resetpw')
     this.logout();
   }
