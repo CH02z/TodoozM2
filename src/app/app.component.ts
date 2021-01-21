@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LanguageService } from './Services/language.service';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { ThemeService } from './Services/theme.service';
 
@@ -17,14 +16,12 @@ export class AppComponent {
 
   title = 'Todooz';
   uid = '';
-  private subscriptions: Subscription[] = [];
 
   constructor(public authService: AuthService,
               public af: AngularFireAuth,
               public langService: LanguageService,
               public themeService: ThemeService,
               private router: Router) {  
-    this.subscriptions.push(
       this.af.authState.subscribe(user => {
         if (user) {
           this.uid = user.uid;
@@ -32,17 +29,12 @@ export class AppComponent {
           this.themeService.setDefaultTheme();
         }
       })
-    );
   }
 
   ngOnInit(): void {
   }
 
-  logout(): void {
-    setTimeout(() => {
-      this.subscriptions.forEach(subscription => subscription.unsubscribe());
-    }, 500);
-    
+  logout(): void {    
     this.authService.logout();
     setTimeout(() => {
       if (this.router.url != "/resetpw") {

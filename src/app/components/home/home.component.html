@@ -41,7 +41,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <app-task-form (closeModal)="closeModal($event)" [category]="selectedCategory"></app-task-form>
+      <app-task-form (closeModal)="closeModal($event)" [selectedCat]="selectedCategory" [categorys]="categorys"></app-task-form>
     </div>
   </ng-template>
 
@@ -55,7 +55,7 @@
     </div>
     <div class="modal-body">
       <app-task-detail *ngIf="!showEditForm" [task]="detailTask"></app-task-detail>
-      <app-task-form *ngIf="showEditForm" [editTask]="detailTask" (closeModal)="closeModal($event)" (hideForm)="hideForm($event)"></app-task-form>
+      <app-task-form *ngIf="showEditForm" [editTask]="detailTask" [categorys]="categorys" (closeModal)="closeModal($event)" (hideForm)="hideForm($event)"></app-task-form>
       <div *ngIf="!showEditForm">
         <button type="button" class="btn btn-secondary btn-sm" (click)="modalRef?.hide()" style="margin-right: 10px;">{{ 'form.close' | translate }}</button>
         <button type="button" class="btn btn-info btn-sm" (click)="showEditForm = !showEditForm">{{ 'form.edit' | translate }}</button>
