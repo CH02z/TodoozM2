@@ -22,13 +22,20 @@ export class CategoryService {
   }
 
   GetCategorys(): AngularFirestoreCollection {
-    return this.db.collection('users').doc(this.uid).collection('categorys');
+    return this.db.collection('users').doc(this.uid).collection('categorys', ref => ref.orderBy('lastModified', 'desc'));
   }
 
   CreateCategory(category: Category): void {
     if (category.name !== undefined) {
-      const newCat: Category = {name: category.name, dateCreated: new Date()};
+      const newCat: Category = {name: category.name, lastModified: new Date()};
       this.db.collection('users').doc(this.uid).collection('categorys').add(newCat);
+    }
+  }
+
+  ModifiyCategory(categoryID: string): void {
+    console.log('modified called')
+    if (categoryID.length !== 0) {
+      this.db.collection('users').doc(this.uid + '/' + 'categorys/' + categoryID).update({lastModified: new Date()});
     }
   }
 

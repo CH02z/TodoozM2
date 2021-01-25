@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { TranslateService } from '@ngx-translate/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/Services/auth.service';
+import { element } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,16 @@ export class LanguageService {
     }
     if (this.uid.length !== 0) {
       let userLang = {"defaultLanguage": langShort};
-      this.db.collection('users').doc(this.uid).update(userLang);
+      this.db.collection('users').doc(this.uid).get().subscribe(
+        doc => {
+          if (doc.data() == undefined) {
+            this.db.collection('users').doc(this.uid).set(userLang);
+          } else {
+            this.db.collection('users').doc(this.uid).update(userLang);
+          }
+        }
+      )
+      
     }
     if (langShort != "") {
       this.translate.use(langShort);
@@ -59,7 +69,6 @@ export class LanguageService {
           
         } else {
           this.translate.use('en');
-          this.selectLang('English')
         }
       }
     )

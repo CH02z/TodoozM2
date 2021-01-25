@@ -9,7 +9,7 @@
         "alrreg": "Already signed up? Login here",
         "noacc": "No account yet? Sign up here",
         "forgPasswd": "Forgot password? Reset it here",
-        "resetpw": "Reset password",
+        "resetpw": "reset password",
         "Didntforg": "Didn't forget password? Login here",
         "reset": "reset",
         "LoggedInAs": "Logged in as",
@@ -18,7 +18,8 @@
         "resetMailSent":  "Mail to reset Password sent",
         "missingMail": "Error: no email adress given",
         "google": "Continue with Google",
-        "continue": "continue"
+        "continue": "continue",
+        "settings": "settings"
     },
     "todo": {
         "addTask": "Add Task",

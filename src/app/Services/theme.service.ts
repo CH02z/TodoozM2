@@ -30,14 +30,14 @@ export class ThemeService {
         this.ThemeConf = element.payload.data();
         if (this.ThemeConf !== undefined) {
           if (this.ThemeConf.defaultTheme == 'light') {
-            this.setActiveTheme(light);
+            this.setHTMLTheme(light);
             this.darkmode = false;
           } else if (this.ThemeConf.defaultTheme == 'dark') {
-            this.setActiveTheme(dark);
+            this.setHTMLTheme(dark);
             this.darkmode = true;
           }
         } else {
-          this.setLightTheme();
+          this.setHTMLTheme(light);
         }
       }
     )
@@ -48,21 +48,23 @@ export class ThemeService {
   }
   
 
-  setDarkTheme(): void {
-    this.setActiveTheme(dark);
-    this.darkmode = true;
-    let userTheme = {"defaultTheme": "dark"};
-    this.db.collection('users').doc(this.uid).update(userTheme)
+  setDBTheme(theme: Theme): void {
+    this.setHTMLTheme(theme);
+    const userTheme = {"defaultTheme": theme.name}; 
+    this.db.collection('users').doc(this.uid).get().subscribe(
+      doc => {
+        if (doc.data() == undefined) {
+          this.db.collection('users').doc(this.uid).set(userTheme)
+        } else {
+          this.db.collection('users').doc(this.uid).update(userTheme)
+        }
+      }
+    )
+    
   }
 
-  setLightTheme(): void {
-    this.setActiveTheme(light);
-    this.darkmode = false;
-    let userTheme = {"defaultTheme": "light"};
-    this.db.collection('users').doc(this.uid).update(userTheme), {merge: true};
-  }
 
-  setActiveTheme(theme: Theme): void {
+  setHTMLTheme(theme: Theme): void {
     this.active = theme;
     Object.keys(this.active.properties).forEach(property => {
       document.documentElement.style.setProperty(

@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from 'src/app/Services/language.service';
 import { ThemeService } from 'src/app/Services/theme.service';
+import { dark, light } from 'dist/todooz2/assets/theme/theme';
 
 @Component({
   selector: 'app-settings',
@@ -39,9 +40,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   toggleTheme() {
     if (this.themeService.isDarkTheme()) {
-      this.themeService.setLightTheme();
+      this.themeService.setDBTheme(light);
     } else {
-      this.themeService.setDarkTheme();
+      this.themeService.setDBTheme(dark);
     }
   }
 
