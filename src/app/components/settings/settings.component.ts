@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { LanguageService } from 'src/app/Services/language.service';
 import { ThemeService } from 'src/app/Services/theme.service';
-import { dark, light } from 'dist/todooz2/assets/theme/theme';
+import { light, dark } from 'src/assets/theme/theme';
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +18,6 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   constructor(public authService: AuthService,
               public af: AngularFireAuth,
-              private translate: TranslateService,
               public themeService: ThemeService,
               public langService: LanguageService) {
       this.subscriptions.push(

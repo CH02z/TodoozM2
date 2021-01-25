@@ -33,7 +33,6 @@ export class CategoryService {
   }
 
   ModifiyCategory(categoryID: string): void {
-    console.log('modified called')
     if (categoryID.length !== 0) {
       this.db.collection('users').doc(this.uid + '/' + 'categorys/' + categoryID).update({lastModified: new Date()});
     }
