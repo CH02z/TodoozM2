@@ -22,7 +22,7 @@ export class TaskService {
   }
 
   GetTasks(): AngularFirestoreCollection {
-    return this.db.collection('users').doc(this.uid).collection('tasks');
+    return this.db.collection('users').doc(this.uid).collection('tasks', ref => ref.orderBy('dateDefined', 'asc'));
   }
 
   CreateTask(task: Task): void {
