@@ -16,6 +16,7 @@ export class TaskFormComponent implements OnInit {
 
   @Output() closeModal = new EventEmitter<string>();
   @Output() hideForm = new EventEmitter<string>();
+  @Output() changedCategory = new EventEmitter<string>();
   @Input() editTask?: Task;
   @Input() selectedCat?: string;
   @Input() categorys?: Category[];
@@ -121,18 +122,28 @@ export class TaskFormComponent implements OnInit {
         if (this.taskForm.valid) {
           if (this.taskForm.value.taskID === "") {
             this.taskService.CreateTask(this.taskForm.value)
+            this.getModifiedCat();
             this.closeModal.emit('hide');
             this.resetForm();
           } else {
             this.taskService.UpdateTask(this.taskForm.value);
+            this.getModifiedCat();
             this.resetForm()
             this.closeModal.emit('hide');
             this.hideForm.emit('hide');
           }
+        
           
         } else {
           this.validateAllFormFields(this.taskForm);
         }
+      }
+    }
+
+    private getModifiedCat(): void {
+      const changedCat = this.taskForm.get('category')?.value;
+      if (changedCat !== '') {
+        this.changedCategory.emit(changedCat);
       }
     }
 

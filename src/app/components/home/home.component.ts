@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
         this.categorys = [];
         this.tasks = [];
         this.getCategorys();
+        
         this.getTasks();
       }
     })
@@ -74,6 +75,18 @@ export class HomeComponent implements OnInit {
       this.tasks = tempTasks;
       tempTasks = []; //reset temp tasks
     })
+  }
+
+  onCategoryModified(name: string): void {
+    if (this.categorys) {
+      this.categorys.forEach(cat => {
+        if (cat.name == name) {
+          if (cat.id) {
+            this.categoryService.ModifiyCategory(cat.id);
+          }
+        }
+      })
+    }
   }
 
   onCheck(taskID: string | undefined) {

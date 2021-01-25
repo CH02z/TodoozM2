@@ -18,7 +18,8 @@
         "resetMailSent":  "Mail zum reseten des Passworts wurde verschickt.",
         "missingMail": "Fehler: eine Email Adresse wird benötigt",
         "google": "Mit google fortfahren",
-        "continue": "weiter"
+        "continue": "weiter",
+        "settings": "Einstellungen"
     },
     "todo": {
         "addTask": "Aufgabe hinzufügen",
