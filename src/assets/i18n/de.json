@@ -46,7 +46,8 @@
         "openTasks": "offene Tasks",
         "oneDayLeft": "In einem Tag fällig",
         "taskOverdue": "Aufgabe überfällig",
-        "CatCannotBeDeleted": "Kategorie kann erst gelöscht werden, wenn alle darin enthaltenen Tasks abgeschlossen sind"
+        "CatCannotBeDeleted": "Kategorie kann erst gelöscht werden, wenn alle darin enthaltenen Tasks abgeschlossen sind",
+        "alrExists": "existiert bereits"
     },
     "form": {
         "task": "Aufgabe",

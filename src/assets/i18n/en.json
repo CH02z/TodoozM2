@@ -46,7 +46,8 @@
         "openTasks": "open tasks",
         "oneDayLeft": "Due in one day",
         "taskOverdue": "Task overdue",
-        "CatCannotBeDeleted": "A category containing unfinished tasks cannot be deleted"
+        "CatCannotBeDeleted": "A category containing unfinished tasks cannot be deleted",
+        "alrExists": "already exists"
     },
     "form": {
         "task": "Task",

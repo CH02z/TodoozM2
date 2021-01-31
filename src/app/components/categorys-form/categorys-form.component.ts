@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,6 +13,7 @@ import { CategoryService } from 'src/app/Services/category.service';
 })
 export class CategorysFormComponent implements OnInit {
 
+  @Input() categorys?: Category[];
   @Output() closeModal = new EventEmitter<string>();
 
   selecteCategory: Category = new Category();
@@ -27,10 +28,21 @@ export class CategorysFormComponent implements OnInit {
 
   onSubmit(form: NgForm): void {
     if (form.valid) {
-      this.categoryService.CreateCategory(this.selecteCategory);
-      this.closeModal.emit('hide');
-      window.alert(this.translate.instant('todo.category') + ": " + this.selecteCategory.name + " " + this.translate.instant('auth.successful') + " " + this.translate.instant('todo.added') + ".");
-      this.resetForm(form);
+      let catExists: boolean = false;
+      this.categorys?.forEach(cat => {
+        if (cat.name == this.selecteCategory.name) {
+          catExists = true;
+        }
+      });
+      if (!catExists) {
+        this.categoryService.CreateCategory(this.selecteCategory);
+        this.closeModal.emit('hide');
+        window.alert(this.translate.instant('todo.category') + ": " + this.selecteCategory.name + " " + this.translate.instant('auth.successful') + " " + this.translate.instant('todo.added') + ".");
+        this.resetForm(form);
+      } else {
+        window.alert(this.translate.instant('todo.category') + ": " + this.selecteCategory.name + " " + this.translate.instant('todo.alrExists') + ".");
+      }
+      
     }
    
   }
