@@ -4,7 +4,6 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/Category';
 import { Task } from 'src/app/models/Task';
-import { CategoryService } from 'src/app/Services/category.service';
 import { TaskService } from 'src/app/Services/task.service';
 
 @Component({

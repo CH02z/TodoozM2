@@ -16,7 +16,7 @@ export class CategorysFormComponent implements OnInit {
   @Input() categorys?: Category[];
   @Output() closeModal = new EventEmitter<string>();
 
-  selecteCategory: Category = new Category();
+  selecteCategory: Category = {} as Category
 
   constructor(public authService: AuthService,
               public af: AngularFireAuth,

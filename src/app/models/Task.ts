@@ -1,11 +1,11 @@
-export class Task {
+export interface Task {
   id?: string;
-  name?: string;
-  endDate?: string;
-  category?: string;
-  isDone?: boolean;
+  name: string;
+  endDate: string;
+  category: string;
+  isDone: boolean;
   description?: string;
-  dateDefined?: number;
+  dateDefined: number;
   dateFinished?: number;
-  highPriority?: boolean;
+  highPriority: boolean;
 }

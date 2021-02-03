@@ -1,13 +1,12 @@
-import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CategoryService } from 'src/app/Services/category.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Category } from 'src/app/models/Category';
-import { Task } from 'src/app/models/Task';
 import { TaskService } from 'src/app/Services/task.service';
-import { map, tap } from 'rxjs/operators';
+import { Task } from 'src/app/models/Task';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +18,7 @@ export class HomeComponent implements OnInit {
   email: string | null = '';
   categorys?: Category[];
   tasks?: Task[];
-  detailTask: Task = new Task();
+  detailTask: Task = {} as Task;
   showEditForm: boolean = false;
   modalRef?: BsModalRef;
   searchTerm?: string;
@@ -109,7 +108,7 @@ export class HomeComponent implements OnInit {
 
   hideForm(status: string): void {
     if (status === 'hide') {
-      this.detailTask  = new Task();
+      this.detailTask  = {} as Task;
       this.showEditForm = false;
     }
   }

@@ -1,5 +1,5 @@
-export class Category {
+export interface Category {
   id?: string;
-  name?: string;
-  lastModified?: Date;
+  name: string;
+  lastModified: Date;
 }
