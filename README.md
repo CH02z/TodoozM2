@@ -6,6 +6,9 @@ Ein selbstentwickeltes Tool, welches mir ermöglicht, meine alltäglichen Tasks 
 
 Die Idee ist keineswegs neuartig, jedoch entspricht dieses Tool meiner Vorstellung einer modernen und simplen Web App, welche auf gute Benutzerfreundlichkeit ausgelegt ist. Ausserdem war die Entwicklung dieses Tools über einen längeren Zeitraum ein sehr spannendes und lehrreiches Projekt für mich.
 
+Wichtiger Hinweis:
+Das Tool wird laufend weiterentwickelt und angepasst, daher kann ich die Verfügbarkeit nicht garantieren muss darauf Hinweisen, dass Daten verloren gehen können.
+
 Technische Details:
 
    - Angular Frontend
