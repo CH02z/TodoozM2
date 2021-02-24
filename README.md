@@ -4,4 +4,13 @@ https://todooz.ch/ - Tasks verwalten
 
 Ein selbstentwickeltes Tool, welches mir ermöglicht, meine alltäglichen Tasks auf eine übersichtliche Art zu erfassen, zu kategorisieren und zu priorisieren.
 
-Selbtverständlich bin ich mit dieser Idee nicht der erste, jedoch ist dieses Tool genau auf meine Bedürfnisse abgestimmt und war für mich über eine längere Zeit ein sehr spannendes und lehrreiches Projekt im Bereich der Webentwicklung.
+Die Idee ist keineswegs neuartig, jedoch entspricht dieses Tool meiner Vorstellung einer modernen und simplen Web App, welche auf gute Benutzerfreundlichkeit ausgelegt ist. Ausserdem war die Entwicklung dieses Tools über einen längeren Zeitraum ein sehr spannendes und lehrreiches Projekt für mich.
+
+Technische Details:
+
+   - Angular Frontend
+   - Google Firebase Backend (DB + Auth)
+   - NGX Translate (Deutsch + Englisch)
+   - Darkmode
+   - Suchfunktion
+   - Responsive Design (Mobile + Desktop)
